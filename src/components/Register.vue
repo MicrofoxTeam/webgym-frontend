@@ -1,88 +1,121 @@
 <template>
-    <div class="Register">
-        <div class="register_wrapper">
-            <div class="menu_wrapper">
-                <h3 class="active-tab">Регистрация</h3>
-                <h3>Вход</h3>
-            </div>
-            <div class="input_wrapper">
-                <input type="text" name="name" placeholder="Ник">
-                <input type="email" name="name" placeholder="Email">
-                <input type="text" name="name" placeholder="Город">
-                <input type="password" name="name" placeholder="Пароль">
-                <input type="password" name="name" placeholder="Повторение пароля">
-            </div>
+    <div class="wrapper">
+        <div class="menu_wrapper">
+            <h3 v-on:click="activeTab = 'register'">Регистрация</h3>
+            <h3 v-on:click="activeTab = 'login'">Вход</h3>
+            <div class="active-tab__line" v-bind:class="{register: activeTab==='register', login: activeTab==='login'}"></div>
         </div>
+        <transition :name="activeTab">
+            <div class="input_wrapper__register" v-if="activeTab==='register'" key="register">
+                <transition-group name="fade" appear>
+                    <input type="text" name="name" placeholder="Ник" key="1">
+                    <input type="email" name="name" placeholder="Email" key="2">
+                    <input type="text" name="name" placeholder="Город" key="3">
+                    <input type="password" name="name" placeholder="Пароль" key="4">
+                    <input type="password" name="name" placeholder="Повторение пароля" key="5">
+                </transition-group>
+            </div>
+            <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
+                <transition-group name="fade" appear>
+                    <input type="email" name="name" placeholder="Email" key="1">
+                    <input type="password" name="name" placeholder="Пароль" key="2">
+                </transition-group>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Register'
+  name: 'Register',
+  data () {
+    return {
+      activeTab: 'register'
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.register_wrapper {
+@import '../main.scss';
+.wrapper {
     width: 300px;
     margin: 0 auto;
     padding-top: 100px;
     color: #D2D6DB;
+    position: relative;
 
     .menu_wrapper {
         display: flex;
         flex-direction: row;
         margin-bottom: 30px;
+        justify-content: space-between;
+        width: 200px;
+        position: relative;
 
         h3 {
-            margin-right: 30px;
             position: relative;
             font-weight: 100;
         }
 
-        .active-tab::after {
-            content: '';
-            width: 117px;
+        .active-tab__line {
             height: 2px;
             background-color: #1f807d;
             position: absolute;
             bottom: -2px;
-            left: 0;
-        }
-    }
-    .input_wrapper {
-        $transition: .2s;
-
-        @for $i from 1 through 5 {
-            :nth-child(#{$i}) {
-                transition: all .2s cubic-bezier(.4,0,1,1);
-                $transitionDelay: $transition * $i;
-                transition-delay: $transitionDelay;
-                opacity: 1;
+            transition: .5s $cubic_bezier;
+            &.register {
+                width: 117px;
+                left: 0;
             }
-        }
-
-        input {
-            transition: all .2s cubic-bezier(.4,0,1,1);
-            opacity: 0;
-            margin-bottom: 20px;
-            height: 30px;
-            width: 100%;
-            background-color: transparent;
-            border: 0;
-            border-bottom: 1px solid #3E4E62;
-            outline: none;
-            font-size: 16px;
-            padding-left: 5px;
-            color: #D2D6DB;
-            &::-webkit-input-placeholder{
-                color: #6e7a89;;
-            }
-
-            &:focus {
-                border-bottom: 1px solid #1f807d;
+            &.login {
+                width: 46px;
+                transform: translateX(156px);
             }
         }
     }
+    .input_wrapper__register {
+        position: absolute;
+        @for $i from 1 through 6 {
+            :nth-child(#{$i}).fade-enter-active {
+                $transitionDelay: .07 * $i;
+                transition-delay: #{$transitionDelay}s;
+            }
+        }
+    }
+    .input_wrapper__login {
+        position: absolute;
+        @for $i from 1 through 3 {
+            :nth-child(#{$i}).fade-enter-active {
+                $transitionDelay: .07 * $i;
+                transition-delay: #{$transitionDelay}s;
+            }
+        }
+    }
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.register-enter-active, .register-leave-active, .login-enter-active, .login-leave-active {
+    transition: transform .5s;
+}
+.register-enter {
+    transform: translateX(-100vw);
+}
+
+.register-leave-to {
+    transform: translateX(100vw);
+}
+.login-enter {
+    transform: translateX(100vw);
+}
+
+.login-leave-to {
+    transform: translateX(-100vw);
 }
 </style>
