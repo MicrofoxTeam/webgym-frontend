@@ -13,13 +13,19 @@
                     <input type="text" name="name" placeholder="Город" key="3">
                     <input type="password" name="name" placeholder="Пароль" key="4">
                     <input type="password" name="name" placeholder="Повторение пароля" key="5">
+                    <div class="gender-select" key="6">
+                        <div class="gender-select--button gender-select--button__left" v-bind:class="{'gender-select--button__active': gender==='male'}" v-on:click="gender = 'male'">
+                            <p>Мужской</p>
+                        </div>
+                        <div class="gender-select--button gender-select--button__right" v-bind:class="{'gender-select--button__active': gender==='female'}" v-on:click="gender = 'female'">
+                            <p>Женский</p>
+                        </div>
+                    </div>
                 </transition-group>
             </div>
             <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
-                <transition-group name="fade" appear>
-                    <input type="email" name="name" placeholder="Email" key="1">
-                    <input type="password" name="name" placeholder="Пароль" key="2">
-                </transition-group>
+                    <input type="email" name="name" placeholder="Email">
+                    <input type="password" name="name" placeholder="Пароль">
             </div>
         </transition>
     </div>
@@ -30,7 +36,8 @@ export default {
   name: 'Register',
   data () {
     return {
-      activeTab: 'register'
+      activeTab: 'register',
+      gender: 'male'
     }
   }
 }
@@ -56,6 +63,7 @@ export default {
         h3 {
             position: relative;
             font-weight: 100;
+            user-select: none;
         }
 
         .active-tab__line {
@@ -78,8 +86,53 @@ export default {
         position: absolute;
         @for $i from 1 through 6 {
             :nth-child(#{$i}).fade-enter-active {
-                $transitionDelay: .07 * $i;
+                $transitionDelay: .1 * $i;
                 transition-delay: #{$transitionDelay}s;
+            }
+        }
+
+        .gender-select {
+            margin-top: 20px;
+            height: 40px;
+            width: 100%;
+            background-color: transparent;
+            border-radius: 20px;
+            display: flex;
+            cursor: pointer;
+            user-select: none;
+
+            :active, :focus {
+                outline: none;
+            }
+
+            ::-moz-focus-inner {
+                border: 0;
+            }
+
+            .gender-select--button {
+                width: 50%;
+                display: flex;
+
+                p {
+                    margin: auto;
+                }
+            }
+
+            .gender-select--button__left {
+                border-radius: 20px 0 0 20px;
+                border: 1px solid #6e7a89;
+                border-right: none!important;
+            }
+
+            .gender-select--button__right {
+                border-radius: 0 20px 20px 0;
+                border: 1px solid #6e7a89;
+                border-left: none!important;
+            }
+
+            .gender-select--button__active {
+                background-color: #1f807d;
+                border: 1px solid #1f807d;
             }
         }
     }
@@ -87,7 +140,7 @@ export default {
         position: absolute;
         @for $i from 1 through 3 {
             :nth-child(#{$i}).fade-enter-active {
-                $transitionDelay: .07 * $i;
+                $transitionDelay: .1 * $i;
                 transition-delay: #{$transitionDelay}s;
             }
         }

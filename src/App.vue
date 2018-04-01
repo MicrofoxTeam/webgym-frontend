@@ -19,6 +19,7 @@ export default {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(#394C63,#212D3E);
+    overflow-x: hidden;
   }
   * {
     margin: 0;
