@@ -8,11 +8,15 @@
         <transition :name="activeTab">
             <div class="input_wrapper__register" v-if="activeTab==='register'" key="register">
                 <transition-group name="fade" appear>
-                    <input type="text" name="name" placeholder="Ник" key="1">
+                    <input type="text" name="name" placeholder="Ник" key="1" v-model="registerName">
                     <input type="email" name="name" placeholder="Email" key="2">
                     <input type="text" name="name" placeholder="Город" key="3">
-                    <input type="password" name="name" placeholder="Пароль" key="4">
-                    <input type="password" name="name" placeholder="Повторение пароля" key="5">
+                    <input type="password" name="name" placeholder="Пароль" key="4" v-model="registerPassword">
+                    <input type="password" name="name" placeholder="Повторение пароля"
+                           key="5"
+                           v-model="registerPasswordRepeat"
+                           v-bind:class="{'incorrect-input': registerPassword!==registerPasswordRepeat && registerPassword!==''}"
+                    >
                     <div class="gender-select" key="6">
                         <div class="gender-select--button gender-select--button__left" v-bind:class="{'gender-select--button__active': gender==='male'}" v-on:click="gender = 'male'">
                             <p>Мужской</p>
@@ -22,6 +26,15 @@
                         </div>
                     </div>
                 </transition-group>
+                <a href="/">
+                    <transition name="fade">
+                        <div class="next-button"
+                             v-if="registerPassword===registerPasswordRepeat && registerPassword!==''"
+                        >
+                            <p>Зарегистрироваться</p>
+                        </div>
+                    </transition>
+                </a>
             </div>
             <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
                 <input type="email" name="name" placeholder="Email" v-model="loginEmail">
@@ -44,7 +57,12 @@ export default {
       activeTab: 'register',
       gender: 'male',
       loginEmail: '',
-      loginPassword: ''
+      loginPassword: '',
+      registerName: '',
+      registerEmail: '',
+      registerCity: '',
+      registerPassword: '',
+      registerPasswordRepeat: ''
     }
   }
 }
@@ -91,12 +109,14 @@ export default {
     }
     .input_wrapper__register {
         position: absolute;
-        @for $i from 1 through 6 {
+        @for $i from 1 through 10 {
             :nth-child(#{$i}).fade-enter-active {
                 $transitionDelay: .1 * $i;
                 transition-delay: #{$transitionDelay}s;
             }
         }
+
+        padding-bottom: 80px;
 
         .gender-select {
             margin-top: 20px;
