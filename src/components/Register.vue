@@ -24,8 +24,13 @@
                 </transition-group>
             </div>
             <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
-                    <input type="email" name="name" placeholder="Email">
-                    <input type="password" name="name" placeholder="Пароль">
+                <input type="email" name="name" placeholder="Email" v-model="loginEmail">
+                <input type="password" name="name" placeholder="Пароль" v-model="loginPassword">
+                <a href="/">
+                    <transition name="fade">
+                        <div class="next-button" v-if="loginEmail!=='' && loginPassword!==''"><p>Войти</p></div>
+                    </transition>
+                </a>
             </div>
         </transition>
     </div>
@@ -37,7 +42,9 @@ export default {
   data () {
     return {
       activeTab: 'register',
-      gender: 'male'
+      gender: 'male',
+      loginEmail: '',
+      loginPassword: ''
     }
   }
 }
@@ -144,6 +151,8 @@ export default {
                 transition-delay: #{$transitionDelay}s;
             }
         }
+
+        padding-bottom: 80px;
     }
 }
 
@@ -170,5 +179,19 @@ export default {
 
 .login-leave-to {
     transform: translateX(-100vw);
+}
+.next-button {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    background-color: #1f807d;
+    color: white;
+    display: flex;
+    border-radius: 12px;
+
+    p {
+        margin: auto;
+    }
 }
 </style>
