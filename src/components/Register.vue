@@ -56,7 +56,7 @@ export default {
     width: 300px;
     margin: 0 auto;
     padding-top: 100px;
-    color: #D2D6DB;
+    color: $text-color;
     position: relative;
 
     .menu_wrapper {
@@ -75,7 +75,7 @@ export default {
 
         .active-tab__line {
             height: 2px;
-            background-color: #1f807d;
+            background-color: $accent-color;
             position: absolute;
             bottom: -2px;
             transition: .5s $cubic_bezier;
@@ -108,17 +108,18 @@ export default {
             cursor: pointer;
             user-select: none;
 
-            :active, :focus {
+            &:active, &:focus {
                 outline: none;
             }
 
-            ::-moz-focus-inner {
+            &::-moz-focus-inner {
                 border: 0;
             }
 
             .gender-select--button {
                 width: 50%;
                 display: flex;
+                border: 1px solid $secondary-color;
 
                 p {
                     margin: auto;
@@ -127,19 +128,17 @@ export default {
 
             .gender-select--button__left {
                 border-radius: 20px 0 0 20px;
-                border: 1px solid #6e7a89;
                 border-right: none!important;
             }
 
             .gender-select--button__right {
                 border-radius: 0 20px 20px 0;
-                border: 1px solid #6e7a89;
                 border-left: none!important;
             }
 
             .gender-select--button__active {
-                background-color: #1f807d;
-                border: 1px solid #1f807d;
+                background-color: $accent-color;
+                border: 1px solid $accent-color;
             }
         }
     }
@@ -179,19 +178,5 @@ export default {
 
 .login-leave-to {
     transform: translateX(-100vw);
-}
-.next-button {
-    width: 100%;
-    height: 60px;
-    position: absolute;
-    bottom: 0;
-    background-color: #1f807d;
-    color: white;
-    display: flex;
-    border-radius: 12px;
-
-    p {
-        margin: auto;
-    }
 }
 </style>
