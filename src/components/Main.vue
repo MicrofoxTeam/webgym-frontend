@@ -1,7 +1,23 @@
 <template>
   <div class="menu">
-    <div class="menu-circle"></div>
-
+    <cabinet></cabinet>
+    <div class="menu-circle">
+      <div class="menu-button">
+        <p>A</p>
+      </div>
+      <div class="menu-button">
+        <p>A</p>
+      </div>
+      <div class="menu-button">
+        <p>A</p>
+      </div>
+      <div class="menu-button">
+        <p>A</p>
+      </div>
+      <div class="menu-button">
+        <p>A</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -12,14 +28,14 @@ export default {
     'sale-script': () => import('./main/sale-script.vue'),
     'user-slider': () => import('./main/user-slider.vue'),
     'tags-area': () => import('./main/tags-area.vue'),
-    'status': () => import('./main/status.vue')
+    'cabinet': () => import('./main/status.vue')
   }
 }
 </script>
 
 <style lang="scss" scoped>
   @import '../main.scss';
-  .Main {
+  .menu {
     width: 100%;
     height: 100%;
   }
@@ -30,5 +46,26 @@ export default {
     margin: 100px auto 0 auto;
     border-radius: 150px;
     border: 2px solid $accent-color;
+
+    .menu-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      border: 1.5px solid $text-color;
+      background-color: $text-color;
+      display: flex;
+      position: absolute;
+      p {
+        margin: auto;
+        color:  $accent-color;
+      }
+
+      @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          left: #{$i * 70}px;
+          top: #{$i * 70}px;
+        }
+      }
+    }
   }
 </style>
