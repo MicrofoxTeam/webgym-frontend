@@ -1,5 +1,6 @@
 <template>
-  <div class="Main">
+  <div class="menu">
+    <div class="menu-circle"></div>
 
   </div>
 </template>
@@ -21,5 +22,13 @@ export default {
   .Main {
     width: 100%;
     height: 100%;
+  }
+
+  .menu-circle {
+    width: 300px;
+    height: 300px;
+    margin: 100px auto 0 auto;
+    border-radius: 150px;
+    border: 2px solid $accent-color;
   }
 </style>
