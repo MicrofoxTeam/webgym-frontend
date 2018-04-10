@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="Register">
         <div class="menu_wrapper">
             <h3 v-on:click="activeTab = 'register'">Регистрация</h3>
             <h3 v-on:click="activeTab = 'login'">Вход</h3>
@@ -70,7 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../main.scss';
-.wrapper {
+.Register {
     width: 300px;
     margin: 0 auto;
     padding-top: 100px;
