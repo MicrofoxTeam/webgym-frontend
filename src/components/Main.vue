@@ -3,6 +3,12 @@
     <cabinet></cabinet>
     <div class="menu-circle">
       <div class="menu-button">
+        <p>0</p>
+      </div>
+      <div class="menu-button">
+        <p>A</p>
+      </div>
+      <div class="menu-button">
         <p>A</p>
       </div>
       <div class="menu-button">
@@ -35,6 +41,7 @@ export default {
 
 <style lang="scss" scoped>
   @import '../main.scss';
+  @import '../onCircle.scss';
   .menu {
     width: 100%;
     height: 100%;
@@ -46,6 +53,7 @@ export default {
     margin: 100px auto 0 auto;
     border-radius: 150px;
     border: 2px solid $accent-color;
+    position: relative;
 
     .menu-button {
       width: 60px;
@@ -60,12 +68,7 @@ export default {
         color:  $accent-color;
       }
 
-      @for $i from 1 through 10 {
-        &:nth-child(#{$i}) {
-          left: #{$i * 70}px;
-          top: #{$i * 70}px;
-        }
-      }
+      @include onCircle(90, 7, 300, 60);
     }
   }
 </style>
