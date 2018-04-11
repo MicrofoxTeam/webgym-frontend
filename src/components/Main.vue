@@ -2,27 +2,11 @@
   <div class="menu">
     <cabinet></cabinet>
     <div class="menu-circle">
-      <div class="menu-button">
-        <p>0</p>
-      </div>
-      <div class="menu-button">
-        <p>A</p>
-      </div>
-      <div class="menu-button">
-        <p>A</p>
-      </div>
-      <div class="menu-button">
-        <p>A</p>
-      </div>
-      <div class="menu-button">
-        <p>A</p>
-      </div>
-      <div class="menu-button">
-        <p>A</p>
-      </div>
-      <div class="menu-button">
-        <p>A</p>
-      </div>
+      <transition-group name="fade" appear>
+        <div class="menu-button" v-for="item in items" v-bind:key=item>
+          <p>{{ item.name }}</p>
+        </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -35,6 +19,19 @@ export default {
     'user-slider': () => import('./main/user-slider.vue'),
     'tags-area': () => import('./main/tags-area.vue'),
     'cabinet': () => import('./main/status.vue')
+  },
+  data () {
+    return {
+      items: [
+        { name: 1 },
+        { name: 2 },
+        { name: 3 },
+        { name: 4 },
+        { name: 5 },
+        { name: 6 },
+        { name: 7 }
+      ]
+    }
   }
 }
 </script>
@@ -54,21 +51,30 @@ export default {
     border-radius: 150px;
     border: 2px solid $accent-color;
     position: relative;
+    @include waterfall(10, .1, fade);
+    @include onCircle(0, 7, 300, 60);
 
-    .menu-button {
-      width: 60px;
-      height: 60px;
-      border-radius: 30px;
-      border: 1.5px solid $text-color;
-      background-color: $text-color;
-      display: flex;
-      position: absolute;
-      p {
-        margin: auto;
-        color:  $accent-color;
+    > span {
+      .menu-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        border: 1.5px solid $text-color;
+        background-color: $text-color;
+        display: flex;
+        position: absolute;
+        p {
+          margin: auto;
+          color:  $accent-color;
+        }
       }
-
-      @include onCircle(90, 7, 300, 60);
     }
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    transform: scale(0);
   }
 </style>

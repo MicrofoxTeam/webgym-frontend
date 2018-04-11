@@ -109,14 +109,8 @@ export default {
     }
     .input_wrapper__register {
         position: absolute;
-        @for $i from 1 through 10 {
-            :nth-child(#{$i}).fade-enter-active {
-                $transitionDelay: .1 * $i;
-                transition-delay: #{$transitionDelay}s;
-            }
-        }
-
         padding-bottom: 80px;
+        @include waterfall(10, .1, fade);
 
         .gender-select {
             margin-top: 20px;
@@ -163,14 +157,8 @@ export default {
     }
     .input_wrapper__login {
         position: absolute;
-        @for $i from 1 through 3 {
-            :nth-child(#{$i}).fade-enter-active {
-                $transitionDelay: .1 * $i;
-                transition-delay: #{$transitionDelay}s;
-            }
-        }
-
         padding-bottom: 80px;
+        @include waterfall(3, .1, fade);
     }
 }
 

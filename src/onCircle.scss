@@ -68,7 +68,7 @@
   $firstDegree: $firstDegree - $stepDegree;
 
   @for $i from 1 through $count {
-    &:nth-child(#{$i}) {
+    :nth-child(#{$i}) {
       left: ($center - $centerEl + sin(($firstDegree + $stepDegree * $i)) * $center)#{px};
       top: ($center - $centerEl - cos(($firstDegree + $stepDegree * $i)) * $center)#{px};
     }

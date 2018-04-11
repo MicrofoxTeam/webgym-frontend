@@ -1,6 +1,6 @@
 $cubic_bezier: cubic-bezier(.7,0,.3,1);
-// $accent-color: #218a8b;
-$accent-color: #13E7D1;
+$accent-color: #218a8b;
+// $accent-color: #13E7D1;
 $secondary-color: #6e7a89;
 $text-color: #D5D6E1;
 $error-color: #80262c;
@@ -51,5 +51,14 @@ input {
     -webkit-transform:rotate($degrees);
     -o-transform:rotate($degrees);
     -ms-transform:rotate($degrees);
+}
+
+@mixin waterfall($count, $transitionStep, $transitionName) {
+    @for $i from 1 through $count {
+        :nth-child(#{$i}).#{$transitionName}-enter-active {
+            $transitionDelay: $transitionStep * $i;
+            transition-delay: #{$transitionDelay}s;
+        }
+    }
 }
 

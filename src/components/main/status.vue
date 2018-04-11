@@ -4,7 +4,9 @@
   >
     <div class="cabinet-namespace"
          v-on:click="isOpened = !isOpened"
-    ></div>
+    >
+      <p>Nick Name</p>
+    </div>
   </div>
 </template>
 
@@ -22,6 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../../main.scss';
 .cabinet {
   transition: .3s;
   position: absolute;
@@ -33,6 +36,7 @@ export default {
   top: 0;
   left: calc(50% - 150px);
   transform: translateY(-200px);
+  z-index: 20;
 
   &.cabinet__open {
     transform: translateY(0);
@@ -47,6 +51,11 @@ export default {
     left: calc(50% - 100px);
     border-bottom-left-radius: 80px;
     border-bottom-right-radius: 80px;
+    display: flex;
+    p {
+      color: $text-color;
+      margin: auto;
+    }
   }
 }
 </style>
