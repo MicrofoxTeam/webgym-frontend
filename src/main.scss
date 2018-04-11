@@ -1,7 +1,8 @@
 $cubic_bezier: cubic-bezier(.7,0,.3,1);
-$accent-color: #218a8b;
+// $accent-color: #218a8b;
+$accent-color: #13E7D1;
 $secondary-color: #6e7a89;
-$text-color: #D2D6DB;
+$text-color: #D5D6E1;
 $error-color: #80262c;
 
 input {
@@ -35,10 +36,10 @@ input {
     height: 48px;
     position: absolute;
     bottom: 0;
-    background-color: #1f807d;
-    color: white;
+    border: 1px solid $accent-color;
     display: flex;
     border-radius: 12px;
+    color: $text-color;
 
     p {
         margin: auto;

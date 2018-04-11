@@ -92,7 +92,7 @@ export default {
         }
 
         .active-tab__line {
-            height: 2px;
+            height: 1px;
             background-color: $accent-color;
             position: absolute;
             bottom: -2px;
@@ -148,16 +148,15 @@ export default {
 
             .gender-select--button__left {
                 border-radius: 20px 0 0 20px;
-                border-right: none!important;
+                border-right: none;
             }
 
             .gender-select--button__right {
                 border-radius: 0 20px 20px 0;
-                border-left: none!important;
+                border-left: none;
             }
 
             .gender-select--button__active {
-                background-color: $accent-color;
                 border: 1px solid $accent-color;
             }
         }

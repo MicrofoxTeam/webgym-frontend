@@ -18,7 +18,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(#394C63,#212D3E);
+    background: linear-gradient(#2f4259,#212D3E, #1C1E2A);
     overflow-x: hidden;
   }
   * {
