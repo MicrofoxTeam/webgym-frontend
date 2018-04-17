@@ -15,10 +15,7 @@
 export default {
   name: 'main',
   components: {
-    'sale-script': () => import('./main/sale-script.vue'),
-    'user-slider': () => import('./main/user-slider.vue'),
-    'tags-area': () => import('./main/tags-area.vue'),
-    'cabinet': () => import('./main/status.vue')
+    'sale-script': () => import('./main/sale-script.vue')
   },
   data () {
     return {
@@ -42,30 +39,32 @@ export default {
   .menu {
     width: 100%;
     height: 100%;
+    padding-top: 170px;
   }
 
   .menu-circle {
     width: 300px;
     height: 300px;
-    margin: 100px auto 0 auto;
+    margin: 0 auto;
     border-radius: 150px;
-    border: 2px solid $accent-color;
+    border: 1.5px solid $accent-color;
     position: relative;
     @include waterfall(10, .1, fade);
-    @include onCircle(0, 7, 300, 60);
+    @include onCircle(0, 7, 300, 60, 360, 0, 0);
 
     > span {
       .menu-button {
         width: 60px;
         height: 60px;
         border-radius: 30px;
-        border: 1.5px solid $text-color;
-        background-color: $text-color;
+        background-color: $accent-color;
         display: flex;
         position: absolute;
+        box-shadow: 0 0 10px rgba(1, 1, 1, 0.4);
         p {
           margin: auto;
-          color:  $accent-color;
+          color:  $text-color;
+          font-size: 28px;
         }
       }
     }

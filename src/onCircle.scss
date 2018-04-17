@@ -57,20 +57,19 @@
   @return sin($angle) / cos($angle);
 }
 
-@function wtf($angle) {
-  @return $angle#{deg};
-}
-
-@mixin onCircle($firstDegree, $count, $width, $widthEl) {
+@mixin onCircle($firstDegree, $count, $width, $widthEl, $maxAngle, $x, $y) {
   $center: $width / 2;
   $centerEl: $widthEl / 2;
-  $stepDegree: 360 / $count;
+  $stepDegree: $maxAngle / $count;
+  @if $maxAngle != 360 {
+    $stepDegree: $maxAngle / ($count - 1);
+  }
   $firstDegree: $firstDegree - $stepDegree;
 
   @for $i from 1 through $count {
     :nth-child(#{$i}) {
-      left: ($center - $centerEl + sin(($firstDegree + $stepDegree * $i)) * $center)#{px};
-      top: ($center - $centerEl - cos(($firstDegree + $stepDegree * $i)) * $center)#{px};
+      left: (($center - $centerEl + sin(($firstDegree + $stepDegree * $i)) * $center) + $x)#{px};
+      top: (($center - $centerEl - cos(($firstDegree + $stepDegree * $i)) * $center) + $y)#{px};
     }
   }
 }
