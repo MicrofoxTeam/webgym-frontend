@@ -1,7 +1,7 @@
 <template>
   <div class="menu shadow-block">
     <router-link to="/promotions">
-      <div class="menu_button" v-bind:class="{active: currentRoute === 'promotions' }">
+      <div class="menu_button">
         <div class="menu_image">
           <img src="../assets/calendar.png">
         </div>
@@ -9,7 +9,7 @@
       </div>
     </router-link>
     <router-link to="/clubs">
-      <div class="menu_button" v-bind:class="{active: currentRoute === 'clubs' }">
+      <div class="menu_button">
         <div class="menu_image">
           <img src="../assets/group.png">
         </div>
@@ -17,7 +17,7 @@
       </div>
     </router-link>
     <router-link to="/training">
-      <div class="menu_button" v-bind:class="{active: currentRoute === 'training' }">
+      <div class="menu_button">
         <div class="menu_image">
           <img src="../assets/training.png">
         </div>
@@ -25,7 +25,7 @@
       </div>
     </router-link>
     <router-link to="/events">
-      <div class="menu_button" v-bind:class="{active: currentRoute === 'events' }">
+      <div class="menu_button">
         <div class="menu_image">
           <img src="../assets/calendar.png">
         </div>
@@ -33,7 +33,7 @@
       </div>
     </router-link>
     <router-link to="/account">
-      <div class="menu_button" v-bind:class="{active: currentRoute === 'account' }">
+      <div class="menu_button">
         <div class="menu_image">
           <img src="../assets/person.png">
         </div>
