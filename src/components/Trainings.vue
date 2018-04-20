@@ -33,6 +33,7 @@ export default {
   .trainings {
     width: 100vw;
     height: 100vh;
+    padding-top: 5.5vw;
     padding-bottom: calc(100vw / 6.25);
     position: relative;
     z-index: 1;

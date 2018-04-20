@@ -90,12 +90,12 @@ export default {
       p {
         font-size: 11px;
         color: $secondary-color;
-        transition: .3s $cubic_bezier;
+        transition: .2s $cubic_bezier;
       }
     }
 
     .active-line {
-      transition: .3s $cubic_bezier;
+      transition: .2s $cubic_bezier;
       width: 20vw;
       height: 3px;
       background-color: $accent-color;
