@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '@/components/Register'
-import Training from '@/components/Training'
+import Trainings from '@/components/Trainings'
 import Create from '@/components/Create'
 
 Vue.use(Router)
@@ -14,9 +14,9 @@ export default new Router({
       component: Register
     },
     {
-      path: '/',
-      name: 'training',
-      component: Training
+      path: '/trainings',
+      name: 'trainings',
+      component: Trainings
     },
     {
       path: '/Create',

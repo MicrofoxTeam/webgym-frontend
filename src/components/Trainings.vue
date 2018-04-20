@@ -1,12 +1,17 @@
 <template>
-  <div class="training">
-    123
-  </div>
+  <transition name="fade">
+    <div class="trainings">
+      <newTraining></newTraining>
+    </div>
+  </transition>
 </template>
 
 <script>
 export default {
-  name: 'Training',
+  name: 'Trainings',
+  components: {
+    'newTraining': () => import('./trainings/newTraining.vue')
+  },
   data () {
     return {
       items: [
@@ -25,10 +30,10 @@ export default {
 
 <style lang="scss" scoped>
   @import '../main.scss';
-  .training {
+  .trainings {
     width: 100vw;
     height: 100vh;
-    padding-top: 170px;
+    padding-bottom: calc(100vw / 6.25);
     position: relative;
     z-index: 1;
   }
