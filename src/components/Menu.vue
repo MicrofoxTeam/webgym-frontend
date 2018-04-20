@@ -1,35 +1,45 @@
 <template>
   <div class="menu shadow-block">
-    <div class="menu_button">
-      <div class="menu_image">
-        <img src="../assets/calendar.png">
+    <router-link to="/promotions">
+      <div class="menu_button" v-bind:class="{active: currentRoute === 'promotions' }">
+        <div class="menu_image">
+          <img src="../assets/calendar.png">
+        </div>
+        <p class="noselect">АКЦИИ</p>
       </div>
-      <p class="noselect">АКЦИИ</p>
-    </div>
-    <div class="menu_button">
-      <div class="menu_image">
-        <img src="../assets/group.png">
+    </router-link>
+    <router-link to="/clubs">
+      <div class="menu_button" v-bind:class="{active: currentRoute === 'clubs' }">
+        <div class="menu_image">
+          <img src="../assets/group.png">
+        </div>
+        <p class="noselect">КЛУБЫ</p>
       </div>
-      <p class="noselect">КЛУБЫ</p>
-    </div>
-    <div class="menu_button active">
-      <div class="menu_image">
-        <img src="../assets/training.png">
+    </router-link>
+    <router-link to="/training">
+      <div class="menu_button" v-bind:class="{active: currentRoute === 'training' }">
+        <div class="menu_image">
+          <img src="../assets/training.png">
+        </div>
+        <p class="noselect">ТРЕНИРОВКИ</p>
       </div>
-      <p class="noselect">ТРЕНИРОВКИ</p>
-    </div>
-    <div class="menu_button">
-      <div class="menu_image">
-        <img src="../assets/calendar.png">
+    </router-link>
+    <router-link to="/events">
+      <div class="menu_button" v-bind:class="{active: currentRoute === 'events' }">
+        <div class="menu_image">
+          <img src="../assets/calendar.png">
+        </div>
+        <p class="noselect">СОБЫТИЯ</p>
       </div>
-      <p class="noselect">СОБЫТИЯ</p>
-    </div>
-    <div class="menu_button">
-      <div class="menu_image">
-        <img src="../assets/person.png">
+    </router-link>
+    <router-link to="/account">
+      <div class="menu_button" v-bind:class="{active: currentRoute === 'account' }">
+        <div class="menu_image">
+          <img src="../assets/person.png">
+        </div>
+        <p class="noselect">АККАУНТ</p>
       </div>
-      <p class="noselect">АККАУНТ</p>
-    </div>
+    </router-link>
     <div class="active-line"></div>
   </div>
 </template>
@@ -39,6 +49,11 @@ export default {
   name: 'Menu',
   data () {
     return {
+    }
+  },
+  computed: {
+    currentRoute: function () {
+      return this.$route.name
     }
   }
 }
@@ -65,7 +80,7 @@ export default {
       z-index: 3;
       .menu_image {
         height: calc(100% / 2.22);
-        max-width: 85%;
+        max-width: 70%;
         img {
           width: 100%;
           height: 100%;
@@ -77,29 +92,29 @@ export default {
         color: $secondary-color;
         transition: .3s $cubic_bezier;
       }
-
-      @for $i from 1 through 5 {
-        &:nth-child(#{$i}).active {
-          p {
-            color: $text-color;
-          }
-
-          ~ .active-line{
-            transform: translateX(#{($i * 20 - 20)}vw);
-          }
-        }
-      }
     }
 
     .active-line {
       transition: .3s $cubic_bezier;
       width: 20vw;
-      height: 2px;
+      height: 3px;
       background-color: $accent-color;
       position: absolute;
       bottom: 0;
       left: 0;
       z-index: 4;
+    }
+
+    @for $i from 1 through 5 {
+      :nth-child(#{$i}).router-link-active {
+        .menu_button p {
+          color: $text-color;
+        }
+
+        ~ .active-line{
+          transform: translateX(#{($i * 20 - 20)}vw);
+        }
+      }
     }
   }
 </style>

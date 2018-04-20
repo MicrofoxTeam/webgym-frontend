@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '@/components/Register'
 import Training from '@/components/Training'
-import Menu from '@/components/Menu'
 import Create from '@/components/Create'
 
 Vue.use(Router)
