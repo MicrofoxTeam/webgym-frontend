@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </transition-group>
-                    <a href="/">
+                    <a href="#/trainings">
                         <transition name="fade">
                             <div class="next-button"
                                  v-if="registerPassword===registerPasswordRepeat && registerPassword!==''"
@@ -40,7 +40,7 @@
                 <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
                     <input type="email" name="name" placeholder="Email" v-model="loginEmail">
                     <input type="password" name="name" placeholder="Пароль" v-model="loginPassword">
-                    <a href="/">
+                    <a href="#/trainings">
                         <transition name="fade">
                             <div class="next-button" v-if="loginEmail!=='' && loginPassword!==''"><p>Войти</p></div>
                         </transition>
