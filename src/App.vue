@@ -31,6 +31,7 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'roxima Nova Light', sans-serif;
   }
   @font-face {
       font-family: 'Proxima Nova Semibold';

@@ -37,6 +37,26 @@ input {
     }
 }
 
+textarea {
+    transition: all .4s;
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #3E4E62;
+    outline: none;
+    font-size: 16px;
+    padding-left: 5px;
+    color: $text-color;
+    &::-webkit-input-placeholder{
+        color: $secondary-color;
+    }
+
+    &:focus {
+        border-bottom: 1px solid $accent-color;
+    }
+}
+
 .incorrect-input {
     border-bottom: 1px solid $error-color!important;
 }
