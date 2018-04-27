@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Register from '@/components/Register'
 import Trainings from '@/components/Trainings'
 import Create from '@/components/Create'
+import Account from '@/components/Account'
 
 Vue.use(Router)
 
@@ -15,13 +16,18 @@ export default new Router({
     },
     {
       path: '/trainings',
-      name: 'trainings',
+      name: 'Trainings',
       component: Trainings
     },
     {
-      path: '/Create',
+      path: '/create',
       name: 'Create',
       component: Create
+    },
+    {
+      path: '/account',
+      name: 'Account',
+      component: Account
     }
   ]
 })

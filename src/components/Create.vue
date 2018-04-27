@@ -66,14 +66,19 @@ export default {
 <style lang="scss" scoped>
   @import '../main.scss';
   .Create {
-    width: 300px;
+    width: 100vw;
+    height: 100vh;
     color: $text-color;
-    margin: 0 auto;
+    background-color: $background_module-color;
+    z-index: 100;
+    position: relative;
   }
 
   .day-selector--wrapper {
+    width: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
+    margin: 0 auto;
 
     > div {
       display: flex;

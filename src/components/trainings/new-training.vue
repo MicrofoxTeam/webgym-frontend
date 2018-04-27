@@ -1,8 +1,5 @@
 <template>
-    <div class="newTraining"
-         v-on:click="isOpen = !isOpen"
-         v-bind:class="{newTraining_open: isOpen}"
-    >
+    <div class="newTraining">
         <p class="noselect">Создать программу..</p>
     </div>
 </template>

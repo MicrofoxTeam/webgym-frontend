@@ -10,7 +10,7 @@
 export default {
   name: 'Trainings',
   components: {
-    'newTraining': () => import('./trainings/newTraining.vue')
+    'newTraining': () => import('./trainings/new-training.vue')
   },
   data () {
     return {

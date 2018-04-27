@@ -78,12 +78,15 @@ export default {
     background-color: $background_module-color;
     z-index: 100;
     position: relative;
+    overflow-y: scroll;
+
     .register_wrapper {
         width: 300px;
         margin: 0 auto;
         padding-top: 100px;
         color: $text-color;
         position: relative;
+
         .menu_wrapper {
             display: flex;
             flex-direction: row;
@@ -114,6 +117,7 @@ export default {
                 }
             }
         }
+
         .input_wrapper__register {
             position: absolute;
             padding-bottom: 80px;
@@ -163,6 +167,7 @@ export default {
                 }
             }
         }
+
         .input_wrapper__login {
             position: absolute;
             padding-bottom: 80px;
