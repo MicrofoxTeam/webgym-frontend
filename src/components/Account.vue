@@ -206,7 +206,7 @@ export default {
   }
 
   .openBottom-enter-active, .openBottom-leave-active {
-    transition: transform .5s;
+    transition: transform .5s $cubic_bezier;
   }
   .openBottom-enter {
     transform: translateY(100vh);

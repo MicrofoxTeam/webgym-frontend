@@ -40,11 +40,9 @@
                 <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
                     <input type="email" name="name" placeholder="Email" v-model="loginEmail">
                     <input type="password" name="name" placeholder="Пароль" v-model="loginPassword">
-                    <a href="#/trainings">
-                        <transition name="fade">
-                            <div class="next-button" v-if="loginEmail!=='' && loginPassword!==''"><p>Войти</p></div>
-                        </transition>
-                    </a>
+                    <transition name="fade">
+                        <div class="next-button" v-if="loginEmail!=='' && loginPassword!==''" @click="login()"><p>Войти</p></div>
+                    </transition>
                 </div>
             </transition>
         </div>
@@ -65,6 +63,11 @@ export default {
       registerCity: '',
       registerPassword: '',
       registerPasswordRepeat: ''
+    }
+  },
+  methods: {
+    login () {
+      this.$store.dispatch('login', {'email': this.loginEmail, 'password': this.loginPassword})
     }
   }
 }
