@@ -5,16 +5,14 @@ import Trainings from '@/components/Trainings'
 import Create from '@/components/Create'
 import Account from '@/components/Account'
 
-// import m from './middleware.js'
-
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Register',
-      component: Register
+      name: 'Account',
+      component: Account
     },
     {
       path: '/trainings',
@@ -30,6 +28,11 @@ export default new Router({
       path: '/account',
       name: 'Account',
       component: Account
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ]
 })

@@ -11,10 +11,12 @@
         </div>
         <div class="control_wrapper">
           <h3 v-on:click="isEditPersonalData = true" class="noselect">РЕДАКТИРОВАТЬ</h3>
-          <h3 class="noselect">ВЫЙТИ {{ wtf }}</h3>
+          <h3 class="noselect">ВЫЙТИ {{ deviceId }}</h3>
         </div>
       </div>
     </div>
+    <h1 style="color: white">{{ deviceId }}</h1>
+    <h1 style="color: white">{{ device }}</h1>
     <transition name="openBottom">
       <div class="editPersonalData" v-if="isEditPersonalData">
         <h3 class="closeButton noselect" v-on:click="isEditPersonalData = false">ЗАКРЫТЬ</h3>
@@ -60,8 +62,11 @@ export default {
     }
   },
   computed: {
-    wtf: function () {
-      return this.$store.getters['auth/checkLogin']
+    device: function () {
+      return this.$store.getters['cordova/device']
+    },
+    deviceId: function () {
+      return this.$store.getters['cordova/deviceId']
     }
   }
 }

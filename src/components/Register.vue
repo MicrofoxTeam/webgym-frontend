@@ -9,20 +9,20 @@
             <transition :name="activeTab">
                 <div class="input_wrapper__register" v-if="activeTab==='register'" key="register">
                     <transition-group name="fade" appear>
-                        <input type="text" name="name" placeholder="Ник" key="1" v-model="registerName">
-                        <input type="email" name="name" placeholder="Email" key="2">
-                        <input type="text" name="name" placeholder="Город" key="3">
-                        <input type="password" name="name" placeholder="Пароль" key="4" v-model="registerPassword">
+                        <input type="text" name="name" placeholder="Ник" key="1" v-model="objForRegister.name">
+                        <input type="email" name="name" placeholder="Email" key="2" v-model="objForRegister.email">
+                        <input type="text" name="name" placeholder="Город" key="3" v-model="objForRegister.city">
+                        <input type="password" name="name" placeholder="Пароль" key="4" v-model="objForRegister.password">
                         <input type="password" name="name" placeholder="Повторение пароля"
                                key="5"
-                               v-model="registerPasswordRepeat"
-                               v-bind:class="{'incorrect-input': registerPassword!==registerPasswordRepeat && registerPassword!==''}"
+                               v-model="objForRegister.passwordRepeat"
+                               v-bind:class="{'incorrect-input': objForRegister.password!==objForRegister.passwordRepeat && objForRegister.password!==''}"
                         >
                         <div class="gender-select" key="6">
-                            <div class="gender-select--button gender-select--button__left" v-bind:class="{'gender-select--button__active': gender==='male'}" v-on:click="gender = 'male'">
+                            <div class="gender-select--button gender-select--button__left" v-bind:class="{'gender-select--button__active': objForRegister.gender==='male'}" v-on:click="objForRegister.gender = 'male'">
                                 <p>Мужской</p>
                             </div>
-                            <div class="gender-select--button gender-select--button__right" v-bind:class="{'gender-select--button__active': gender==='female'}" v-on:click="gender = 'female'">
+                            <div class="gender-select--button gender-select--button__right" v-bind:class="{'gender-select--button__active': objForRegister.gender==='female'}" v-on:click="objForRegister.gender = 'female'">
                                 <p>Женский</p>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                     <a href="#/trainings">
                         <transition name="fade">
                             <div class="next-button"
-                                 v-if="registerPassword===registerPasswordRepeat && registerPassword!==''"
+                                 v-if="objForRegister.password===objForRegister.passwordRepeat && objForRegister.password!==''"
                             >
                                 <p>Зарегистрироваться</p>
                             </div>
@@ -38,10 +38,10 @@
                     </a>
                 </div>
                 <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
-                    <input type="email" name="name" placeholder="Email" v-model="loginEmail">
-                    <input type="password" name="name" placeholder="Пароль" v-model="loginPassword">
+                    <input type="email" name="name" placeholder="Email" v-model="objForLogin.email">
+                    <input type="password" name="name" placeholder="Пароль" v-model="objForLogin.password">
                     <transition name="fade">
-                        <div class="next-button" v-if="loginEmail!=='' && loginPassword!==''" @click="login()"><p>Войти</p></div>
+                        <div class="next-button" v-if="objForLogin.email!=='' && objForLogin.password!==''" @click="login()"><p>Войти</p></div>
                     </transition>
                 </div>
             </transition>
@@ -54,20 +54,38 @@ export default {
   name: 'Register',
   data () {
     return {
-      activeTab: 'register',
-      gender: 'male',
-      loginEmail: '',
-      loginPassword: '',
-      registerName: '',
-      registerEmail: '',
-      registerCity: '',
-      registerPassword: '',
-      registerPasswordRepeat: ''
+      objForLogin: {
+        email: '',
+        password: ''
+      },
+      objForRegister: {
+        gender: 'male',
+        name: '',
+        email: '',
+        city: '',
+        password: '',
+        passwordRepeat: ''
+      },
+      activeTab: 'register'
     }
   },
   methods: {
     login () {
-      this.$store.dispatch('login', {'email': this.loginEmail, 'password': this.loginPassword})
+      this.$store.dispatch('auth/login', this.objForLogin).then(() => {
+        if (this.$store.getters['auth/checkLogin']) {
+          this.$router.push('trainings')
+        }
+      })
+    }
+  },
+  computed: {
+    status: function () {
+      return this.$store.getters['auth/getStatus']
+    }
+  },
+  beforeCreate: function () {
+    if (this.$store.getters['auth/checkLogin']) {
+      this.$router.push('trainings')
     }
   }
 }

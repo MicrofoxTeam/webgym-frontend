@@ -13,16 +13,24 @@ const state = {
 const getters = {
   getUser: state => state.user,
   getToken: state => state.token,
-  checkLogin: state => state.auth
+  checkLogin: state => state.auth,
+  getStatus: state => state.checkoutStatus
 }
 
 // actions
 const actions = {
-  loggin ({ commit, state }, credentials) {
-    commit(types.AUTH_REQUESTING)
-    api.$auth.login(credentials)
-      .done((data) => commit(types.AUTH_SUCCESS, data))
-      .fail(() => commit(types.AUTH_FAIL))
+  login ({ commit, state }, credentials) {
+    return new Promise((resolve, reject) => {
+      commit(types.AUTH_REQUESTING)
+      api.$auth.login(credentials)
+        .then((data) => {
+          commit(types.AUTH_SUCCESS, data)
+          resolve()
+        })
+        .catch(() => {
+          commit(types.AUTH_FAIL)
+        })
+    })
   }
 }
 
@@ -34,9 +42,10 @@ const mutations = {
   [types.AUTH_FAIL] (state) {
     state.checkoutStatus = null
   },
-  [types.AUTH_SUCCESS] (state, {user, token}) {
-    state.user = user
-    state.token = token
+  [types.AUTH_SUCCESS] (state, data) {
+    console.log(JSON.parse(data.data.data))
+    state.user = data.user
+    state.token = data.token
     state.auth = true
     state.checkoutStatus = null
   }

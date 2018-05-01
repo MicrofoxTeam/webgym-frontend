@@ -1,9 +1,12 @@
-import Vue from 'vue'
-import store from '../store'
+import axios from 'axios'
 
-const API_URL = process.env.API_URL
+const HTTP = axios.create({
+  // baseURL: 'http://faustus12-002-site2.itempurl.com/'
+  baseURL: 'http://httpbin.org/'
+})
 
 export default {
+  /*
   getAuthHeader () {
     return {
       'Authorization': 'Bearer ' + store.getters['auth/getToken']
@@ -30,5 +33,19 @@ export default {
         headers: headers
       }
     )
+  }
+  .then(function (response) {
+        alert(response)
+        commit('set', { type: 'token', items: response })
+      })
+      .catch(function (error) {
+        alert(error)
+      })
+  */
+  post (url, body, headers = {}) {
+    return HTTP.post(url, body)
+  },
+  get (url, body, headers = {}) {
+    return HTTP.get(url, body)
   }
 }
