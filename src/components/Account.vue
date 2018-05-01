@@ -11,7 +11,7 @@
         </div>
         <div class="control_wrapper">
           <h3 v-on:click="isEditPersonalData = true" class="noselect">РЕДАКТИРОВАТЬ</h3>
-          <h3 class="noselect">ВЫЙТИ</h3>
+          <h3 class="noselect">ВЫЙТИ {{ wtf }}</h3>
         </div>
       </div>
     </div>
@@ -57,6 +57,11 @@ export default {
   methods: {
     pushBack: function () {
       history.back()
+    }
+  },
+  computed: {
+    wtf: function () {
+      return this.$store.getters['auth/checkLogin']
     }
   }
 }

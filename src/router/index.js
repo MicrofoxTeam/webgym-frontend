@@ -5,6 +5,8 @@ import Trainings from '@/components/Trainings'
 import Create from '@/components/Create'
 import Account from '@/components/Account'
 
+// import m from './middleware.js'
+
 Vue.use(Router)
 
 export default new Router({
