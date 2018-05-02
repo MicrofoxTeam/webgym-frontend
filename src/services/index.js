@@ -5,6 +5,7 @@
 
 import Network from './network.js'
 import Auth from './api/auth.js'
+import Account from './api/account.js'
 import Api from './api'
 
 function plugin (Vue) {
@@ -13,6 +14,7 @@ function plugin (Vue) {
   }
   Vue.prototype.$network = Network
   Vue.prototype.$auth = Auth
+  Vue.prototype.$auth = Account
   Vue.prototype.$api = Api
 }
 

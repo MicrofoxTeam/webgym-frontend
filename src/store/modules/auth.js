@@ -56,7 +56,19 @@ const actions = {
     })
   },
   logout ({ commit, state }) {
-    commit(types.AUTH_LOGOUT)
+    commit(types.AUTH_REQUESTING)
+    api.$auth.logout({})
+      .then((response) => {
+        if (response.data.Success) {
+          commit(types.AUTH_LOGOUT)
+        } else {
+          commit(types.AUTH_FAIL)
+          alert(response.data.Description)
+        }
+      })
+      .catch((data) => {
+        commit(types.AUTH_FAIL)
+      })
   }
 }
 

@@ -34,7 +34,7 @@
                 <p>Запретить</p>
               </div>
             </div>
-            <div class="save-button noselect" @click="isEditPersonalData = false">
+            <div class="save-button noselect" @click="sendChanges()">
               <p>Сохранить</p>
             </div>
           </div>
@@ -61,10 +61,29 @@ export default {
       history.back()
     },
     logout () {
-      this.$store.dispatch('auth/logout').then(() => {
-        if (!this.$store.getters['auth/checkLogin']) {
-          this.$router.push('/')
-        }
+      this.$store.dispatch('auth/logout')
+        .then(() => {
+          if (!this.$store.getters['auth/checkLogin']) {
+            this.$router.push('/')
+          }
+        })
+    },
+    sendChanges () {
+      this.isEditPersonalData = false
+      this.$store.dispatch('account/changeNick', {
+        'NewData': this.user.NickName
+      })
+      this.$store.dispatch('account/changeName', {
+        'NewData': this.user.FullName
+      })
+      this.$store.dispatch('account/changeCity', {
+        'NewData': this.user.City
+      })
+      this.$store.dispatch('account/changeUserAbout', {
+        'NewData': this.user.UserAbout
+      })
+      this.$store.dispatch('account/changeMessageBan', {
+        'NewData': this.user.MessageBan
       })
     }
   },

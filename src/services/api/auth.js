@@ -12,8 +12,5 @@ export default {
   },
   refresh () {
 
-  },
-  getUser (creds) {
-    return Network.get('api/Account/GetUserData', creds)
   }
 }

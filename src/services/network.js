@@ -8,43 +8,8 @@ const HTTP = axios.create({
 })
 
 export default {
-  /*
-  getAuthHeader () {
-    return {
-      'Authorization': 'Bearer ' + store.getters['auth/getToken']
-    }
-  },
-  get (url, params, headers = {}) {
-    let authHeader = this.getAuthHeader()
-    Object.assign(headers, authHeader)
-    return Vue.http.get(
-      API_URL + url,
-      {
-        params: params,
-        headers: headers
-      }
-    )
-  },
-  post (url, body, headers = {}) {
-    let authHeader = this.getAuthHeader()
-    Object.assign(headers, authHeader)
-    return Vue.http.post(
-      API_URL + url,
-      body,
-      {
-        headers: headers
-      }
-    )
-  }
-  .then(function (response) {
-        alert(response)
-        commit('set', { type: 'token', items: response })
-      })
-      .catch(function (error) {
-        alert(error)
-      })
-  */
   post (url, body) {
+    body.Token = store.getters['auth/getToken']
     JSON.stringify(body)
     return HTTP.post(url, body)
   },
@@ -53,5 +18,10 @@ export default {
     return HTTP.get(url, {
       params: body
     })
+  },
+  put (url, body) {
+    body.Token = store.getters['auth/getToken']
+    JSON.stringify(body)
+    return HTTP.put(url, body)
   }
 }
