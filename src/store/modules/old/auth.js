@@ -10,6 +10,7 @@ const state = {
 
 // getters
 const getters = {
+  getUser: state => state.user,
   getToken: state => state.token,
   checkLogin: state => state.auth,
   getStatus: state => state.checkoutStatus
@@ -22,6 +23,7 @@ const actions = {
       commit(types.AUTH_REQUESTING)
       api.$auth.login(credentials)
         .then((response) => {
+          console.log(response)
           if (response.data.Success) {
             commit(types.AUTH_SUCCESS, response.data)
             resolve()

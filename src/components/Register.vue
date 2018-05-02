@@ -32,7 +32,8 @@
                                  v-if="objForRegister.Password===objForRegister.PasswordRepeat && objForRegister.Password!==''"
                                  @click="register()"
                             >
-                                <p>Зарегистрироваться</p>
+                                <p v-if="!status">Зарегистрироваться</p>
+                                <p v-if="status">Выполняется запрос..</p>
                             </div>
                         </transition>
                 </div>
@@ -41,7 +42,12 @@
                     <input type="Password" name="name" placeholder="Пароль" v-model="objForLogin.Password">
                     <p class="error-text">{{ errorText }}</p>
                     <transition name="fade">
-                        <div class="next-button" v-if="objForLogin.Email!=='' && objForLogin.Password!==''" @click="login()"><p>Войти</p></div>
+                        <div class="next-button" v-if="objForLogin.Email!=='' && objForLogin.Password!==''" @click="login()">
+                            <transition name="fade">
+                                <p v-if="!status">Войти</p>
+                                <p v-else>Выполняется запрос..</p>
+                            </transition>
+                        </div>
                     </transition>
                 </div>
             </transition>
@@ -50,6 +56,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Register',
   data () {

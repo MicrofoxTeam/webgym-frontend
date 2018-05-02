@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
 import api from '../../services/api'
+import auth from './auth'
 
 const state = {
   user: null,
@@ -15,7 +16,8 @@ const getters = {
 const actions = {
   getUser ({ commit, state }) {
     commit(types.ACCOUNT_REQUESTING)
-    api.$auth.getUser({})
+    console.log(auth.state)
+    api.$auth.getUser({'Token': auth.state.token})
       .then((response) => {
         commit(types.ACCOUNT_SUCCESS, response.data)
       })

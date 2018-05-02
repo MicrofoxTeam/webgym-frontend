@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '../store'
 
 const HTTP = axios.create({
   baseURL: 'http://faustus12-002-site2.itempurl.com/',
@@ -44,11 +45,11 @@ export default {
       })
   */
   post (url, body) {
-    // const formBody = Object.keys(body).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(body[key])).join('&')
     JSON.stringify(body)
     return HTTP.post(url, body)
   },
   get (url, body) {
+    body.Token = store.getters['auth/getToken']
     return HTTP.get(url, {
       params: body
     })

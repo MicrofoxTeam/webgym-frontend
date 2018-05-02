@@ -6,9 +6,9 @@
         </div>
         <div class="user_wrapper">
           <div class="name_wrapper">
-            <h1>Serega_SRG</h1>
-            <h2>monohrom98@gmail.com</h2>
-            <h2>Аноним</h2>
+            <h1>{{ user.NickName }}</h1>
+            <h2>{{ user.Email }}</h2>
+            <h2>{{ user.FullName }}</h2>
           </div>
           <div class="control_wrapper">
             <h3 class="noselect" @click="isEditPersonalData = true">РЕДАКТИРОВАТЬ</h3>
@@ -20,17 +20,17 @@
         <div class="editPersonalData" v-if="isEditPersonalData">
           <h3 class="closeButton noselect" v-on:click="isEditPersonalData = false">ЗАКРЫТЬ</h3>
           <div class="input_wrapper">
-            <input type="text" name="name" placeholder="Ник">
-            <input type="text" name="name" placeholder="Имя">
-            <input type="email" name="name" placeholder="Email">
-            <input type="text" name="name" placeholder="Город">
-            <textarea rows="3" name="name" placeholder="О себе"></textarea>
+            <input type="text" name="name" placeholder="Ник" v-model="user.NickName">
+            <input type="text" name="name" placeholder="Имя" v-model="user.FullName">
+            <input type="email" name="name" placeholder="Email" v-model="user.Email">
+            <input type="text" name="name" placeholder="Город" v-model="user.City">
+            <textarea rows="3" name="name" placeholder="О себе" v-model="user.UserAbout"></textarea>
             <p class="titleMessage">Входящие сообщения от пользователей:</p>
             <div class="privacy-select">
-              <div class="privacy-select--button privacy-select--button__left" v-bind:class="{'privacy-select--button__active': privacy===true}" v-on:click="privacy = true">
+              <div class="privacy-select--button privacy-select--button__left" v-bind:class="{'privacy-select--button__active': user.MessageBan===true}" v-on:click="user.MessageBan = true">
                 <p>Разрешить</p>
               </div>
-              <div class="privacy-select--button privacy-select--button__right" v-bind:class="{'privacy-select--button__active': privacy===false}" v-on:click="privacy = false">
+              <div class="privacy-select--button privacy-select--button__right" v-bind:class="{'privacy-select--button__active': user.MessageBan===false}" v-on:click="user.MessageBan = false">
                 <p>Запретить</p>
               </div>
             </div>
@@ -70,9 +70,11 @@ export default {
   },
   computed: {
     user: function () {
-      console.log(this.$store.getters['auth/getUser'])
-      return this.$store.getters['auth/getUser']
+      return this.$store.getters['account/getUser']
     }
+  },
+  beforeCreate: function () {
+    this.$store.dispatch('account/getUser')
   }
 }
 </script>
