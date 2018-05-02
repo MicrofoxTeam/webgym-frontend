@@ -1,47 +1,47 @@
 <template>
-  <div class="account">
-    <div class="account_wrapper">
-      <div class="avatar">
-      </div>
-      <div class="user_wrapper">
-        <div class="name_wrapper">
-          <h1>Serega_SRG</h1>
-          <h2>monohrom98@gmail.com</h2>
-          <h2>Аноним</h2>
+  <transition name="fade">
+    <div class="account">
+      <div class="account_wrapper">
+        <div class="avatar">
         </div>
-        <div class="control_wrapper">
-          <h3 v-on:click="isEditPersonalData = true" class="noselect">РЕДАКТИРОВАТЬ</h3>
-          <h3 class="noselect">ВЫЙТИ {{ deviceId }}</h3>
+        <div class="user_wrapper">
+          <div class="name_wrapper">
+            <h1>Serega_SRG</h1>
+            <h2>monohrom98@gmail.com</h2>
+            <h2>Аноним</h2>
+          </div>
+          <div class="control_wrapper">
+            <h3 class="noselect" @click="isEditPersonalData = true">РЕДАКТИРОВАТЬ</h3>
+            <h3 class="noselect" @click="logout()">ВЫЙТИ</h3>
+          </div>
         </div>
       </div>
+      <transition name="openBottom">
+        <div class="editPersonalData" v-if="isEditPersonalData">
+          <h3 class="closeButton noselect" v-on:click="isEditPersonalData = false">ЗАКРЫТЬ</h3>
+          <div class="input_wrapper">
+            <input type="text" name="name" placeholder="Ник">
+            <input type="text" name="name" placeholder="Имя">
+            <input type="email" name="name" placeholder="Email">
+            <input type="text" name="name" placeholder="Город">
+            <textarea rows="3" name="name" placeholder="О себе"></textarea>
+            <p class="titleMessage">Входящие сообщения от пользователей:</p>
+            <div class="privacy-select">
+              <div class="privacy-select--button privacy-select--button__left" v-bind:class="{'privacy-select--button__active': privacy===true}" v-on:click="privacy = true">
+                <p>Разрешить</p>
+              </div>
+              <div class="privacy-select--button privacy-select--button__right" v-bind:class="{'privacy-select--button__active': privacy===false}" v-on:click="privacy = false">
+                <p>Запретить</p>
+              </div>
+            </div>
+            <div class="save-button noselect" @click="isEditPersonalData = false">
+              <p>Сохранить</p>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
-    <h1 style="color: white">{{ deviceId }}</h1>
-    <h1 style="color: white">{{ device }}</h1>
-    <transition name="openBottom">
-      <div class="editPersonalData" v-if="isEditPersonalData">
-        <h3 class="closeButton noselect" v-on:click="isEditPersonalData = false">ЗАКРЫТЬ</h3>
-        <div class="input_wrapper">
-          <input type="text" name="name" placeholder="Ник">
-          <input type="text" name="name" placeholder="Имя">
-          <input type="email" name="name" placeholder="Email">
-          <input type="text" name="name" placeholder="Город">
-          <textarea rows="3" name="name" placeholder="О себе"></textarea>
-          <p class="titleMessage">Входящие сообщения от пользователей:</p>
-          <div class="privacy-select">
-            <div class="privacy-select--button privacy-select--button__left" v-bind:class="{'privacy-select--button__active': privacy===true}" v-on:click="privacy = true">
-              <p>Разрешить</p>
-            </div>
-            <div class="privacy-select--button privacy-select--button__right" v-bind:class="{'privacy-select--button__active': privacy===false}" v-on:click="privacy = false">
-              <p>Запретить</p>
-            </div>
-          </div>
-          <div class="save-button noselect" v-on:click="isEditPersonalData = false">
-            <p>Сохранить</p>
-          </div>
-        </div>
-      </div>
-    </transition>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -59,14 +59,19 @@ export default {
   methods: {
     pushBack: function () {
       history.back()
+    },
+    logout () {
+      this.$store.dispatch('auth/logout').then(() => {
+        if (!this.$store.getters['auth/checkLogin']) {
+          this.$router.push('/')
+        }
+      })
     }
   },
   computed: {
-    device: function () {
-      return this.$store.getters['cordova/device']
-    },
-    deviceId: function () {
-      return this.$store.getters['cordova/deviceId']
+    user: function () {
+      console.log(this.$store.getters['auth/getUser'])
+      return this.$store.getters['auth/getUser']
     }
   }
 }

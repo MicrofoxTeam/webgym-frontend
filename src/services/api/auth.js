@@ -2,15 +2,18 @@ import Network from '../network.js'
 
 export default {
   login (creds) {
-    return Network.post('post', creds)
+    return Network.post('api/Login', creds)
   },
-  register () {
-
+  register (creds) {
+    return Network.post('api/Register', creds)
   },
-  logout () {
-
+  logout (creds) {
+    return Network.post('api/Logout', creds)
   },
   refresh () {
 
+  },
+  getUser (creds) {
+    return Network.get('api/Account', creds)
   }
 }

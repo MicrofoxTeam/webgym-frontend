@@ -58,6 +58,16 @@ const actions = {
   },
   logout ({ commit, state }) {
     commit(types.AUTH_LOGOUT)
+  },
+  getUser ({ commit, state }) {
+    commit(types.AUTH_REQUESTING)
+    api.$auth.getUser({'Token': state.token})
+      .then((response) => {
+        commit(types.GETUSER_SUCCESS, response.data)
+      })
+      .catch((data) => {
+        commit(types.AUTH_FAIL)
+      })
   }
 }
 
@@ -79,6 +89,9 @@ const mutations = {
     state.token = null
     state.auth = false
     state.checkoutStatus = null
+  },
+  [types.GETUSER_SUCCESS] (state, data) {
+    state.user = data.Description
   }
 }
 

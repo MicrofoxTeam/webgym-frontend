@@ -111,6 +111,12 @@ a {
     text-decoration: none;
 }
 
+.error-text {
+    margin: 0 auto;
+    color: $error-color;
+    text-align: center;
+}
+
 .fade-enter-active, .fade-leave-active {
     transition: opacity .2s;
 }

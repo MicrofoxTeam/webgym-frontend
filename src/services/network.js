@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 const HTTP = axios.create({
-  // baseURL: 'http://faustus12-002-site2.itempurl.com/'
-  baseURL: 'http://httpbin.org/'
+  baseURL: 'http://faustus12-002-site2.itempurl.com/',
+  // headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  headers: {'Content-Type': 'application/json'}
 })
 
 export default {
@@ -42,10 +43,14 @@ export default {
         alert(error)
       })
   */
-  post (url, body, headers = {}) {
+  post (url, body) {
+    // const formBody = Object.keys(body).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(body[key])).join('&')
+    JSON.stringify(body)
     return HTTP.post(url, body)
   },
-  get (url, body, headers = {}) {
-    return HTTP.get(url, body)
+  get (url, body) {
+    return HTTP.get(url, {
+      params: body
+    })
   }
 }

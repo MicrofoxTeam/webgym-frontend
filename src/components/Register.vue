@@ -9,39 +9,39 @@
             <transition :name="activeTab">
                 <div class="input_wrapper__register" v-if="activeTab==='register'" key="register">
                     <transition-group name="fade" appear>
-                        <input type="text" name="name" placeholder="Ник" key="1" v-model="objForRegister.name">
-                        <input type="email" name="name" placeholder="Email" key="2" v-model="objForRegister.email">
-                        <input type="text" name="name" placeholder="Город" key="3" v-model="objForRegister.city">
-                        <input type="password" name="name" placeholder="Пароль" key="4" v-model="objForRegister.password">
-                        <input type="password" name="name" placeholder="Повторение пароля"
+                        <input type="text" name="name" placeholder="Ник" key="1" v-model="objForRegister.NickName">
+                        <input type="Email" name="name" placeholder="Email" key="2" v-model="objForRegister.Email">
+                        <input type="text" name="name" placeholder="Город" key="3" v-model="objForRegister.City">
+                        <input type="Password" name="name" placeholder="Пароль" key="4" v-model="objForRegister.Password">
+                        <input type="Password" name="name" placeholder="Повторение пароля"
                                key="5"
-                               v-model="objForRegister.passwordRepeat"
-                               v-bind:class="{'incorrect-input': objForRegister.password!==objForRegister.passwordRepeat && objForRegister.password!==''}"
+                               v-model="objForRegister.PasswordRepeat"
+                               v-bind:class="{'incorrect-input': objForRegister.Password!==objForRegister.PasswordRepeat && objForRegister.Password!==''}"
                         >
                         <div class="gender-select" key="6">
-                            <div class="gender-select--button gender-select--button__left" v-bind:class="{'gender-select--button__active': objForRegister.gender==='male'}" v-on:click="objForRegister.gender = 'male'">
+                            <div class="gender-select--button gender-select--button__left" v-bind:class="{'gender-select--button__active': objForRegister.Sex==='1'}" v-on:click="objForRegister.Sex = '1'">
                                 <p>Мужской</p>
                             </div>
-                            <div class="gender-select--button gender-select--button__right" v-bind:class="{'gender-select--button__active': objForRegister.gender==='female'}" v-on:click="objForRegister.gender = 'female'">
+                            <div class="gender-select--button gender-select--button__right" v-bind:class="{'gender-select--button__active': objForRegister.Sex==='2'}" v-on:click="objForRegister.Sex = '2'">
                                 <p>Женский</p>
                             </div>
                         </div>
                     </transition-group>
-                    <a href="#/trainings">
                         <transition name="fade">
                             <div class="next-button"
-                                 v-if="objForRegister.password===objForRegister.passwordRepeat && objForRegister.password!==''"
+                                 v-if="objForRegister.Password===objForRegister.PasswordRepeat && objForRegister.Password!==''"
+                                 @click="register()"
                             >
                                 <p>Зарегистрироваться</p>
                             </div>
                         </transition>
-                    </a>
                 </div>
                 <div class="input_wrapper__login"  v-if="activeTab==='login'" key="login">
-                    <input type="email" name="name" placeholder="Email" v-model="objForLogin.email">
-                    <input type="password" name="name" placeholder="Пароль" v-model="objForLogin.password">
+                    <input type="Email" name="name" placeholder="Email" v-model="objForLogin.Email">
+                    <input type="Password" name="name" placeholder="Пароль" v-model="objForLogin.Password">
+                    <p class="error-text">{{ errorText }}</p>
                     <transition name="fade">
-                        <div class="next-button" v-if="objForLogin.email!=='' && objForLogin.password!==''" @click="login()"><p>Войти</p></div>
+                        <div class="next-button" v-if="objForLogin.Email!=='' && objForLogin.Password!==''" @click="login()"><p>Войти</p></div>
                     </transition>
                 </div>
             </transition>
@@ -55,27 +55,45 @@ export default {
   data () {
     return {
       objForLogin: {
-        email: '',
-        password: ''
+        Email: '',
+        Password: ''
       },
       objForRegister: {
-        gender: 'male',
-        name: '',
-        email: '',
-        city: '',
-        password: '',
-        passwordRepeat: ''
+        Sex: '1',
+        NickName: '',
+        Email: '',
+        City: '',
+        Password: '',
+        PasswordRepeat: ''
       },
-      activeTab: 'register'
+      activeTab: 'register',
+      errorText: ''
     }
   },
   methods: {
     login () {
-      this.$store.dispatch('auth/login', this.objForLogin).then(() => {
-        if (this.$store.getters['auth/checkLogin']) {
-          this.$router.push('trainings')
-        }
-      })
+      this.$store.dispatch('auth/login', this.objForLogin)
+        .then(() => {
+          if (this.$store.getters['auth/checkLogin']) {
+            this.$router.push('trainings')
+          }
+        })
+        .catch((data) => {
+          console.log(data)
+          this.errorText = data
+        })
+    },
+    register () {
+      this.$store.dispatch('auth/register', this.objForRegister)
+        .then(() => {
+          if (this.$store.getters['auth/checkLogin']) {
+            this.$router.push('trainings')
+          }
+        })
+        .catch((data) => {
+          console.log(data)
+          this.errorText = data
+        })
     }
   },
   computed: {
@@ -198,10 +216,10 @@ export default {
 }
 
 .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
+    transition: opaCity .5s;
 }
 .fade-enter, .fade-leave-to {
-    opacity: 0;
+    opaCity: 0;
 }
 
 .register-enter-active, .register-leave-active, .login-enter-active, .login-leave-active {

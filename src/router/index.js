@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Account',
-      component: Account
+      name: 'Register',
+      component: Register
     },
     {
       path: '/trainings',
@@ -28,11 +28,6 @@ export default new Router({
       path: '/account',
       name: 'Account',
       component: Account
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
     }
   ]
 })

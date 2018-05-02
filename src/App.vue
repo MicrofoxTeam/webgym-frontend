@@ -33,6 +33,9 @@ export default {
     box-sizing: border-box;
     font-family: 'roxima Nova Light', sans-serif;
   }
+  body {
+    background: $background-color;
+  }
   @font-face {
       font-family: 'Proxima Nova Semibold';
       src: url('./assets/fonts/ProximaNova-Semibold.woff') format('woff'),
