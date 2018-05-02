@@ -17,7 +17,11 @@ const actions = {
     commit(types.ACCOUNT_REQUESTING)
     api.$auth.getUser({})
       .then((response) => {
-        commit(types.ACCOUNT_SUCCESS, response.data)
+        if (response.data.Success) {
+          commit(types.ACCOUNT_SUCCESS, response.data)
+        } else {
+          commit(types.ACCOUNT_FAIL)
+        }
       })
       .catch((data) => {
         commit(types.ACCOUNT_FAIL)

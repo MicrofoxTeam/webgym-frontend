@@ -27,9 +27,10 @@
                             </div>
                         </div>
                     </transition-group>
+                    <p class="error-text">{{ errorText }}</p>
                         <transition name="fade">
                             <div class="next-button"
-                                 v-if="objForRegister.Password===objForRegister.PasswordRepeat && objForRegister.Password!==''"
+                                 v-if="isRegisterCompleted"
                                  @click="register()"
                             >
                                 <p v-if="!status">Зарегистрироваться</p>
@@ -42,7 +43,7 @@
                     <input type="Password" name="name" placeholder="Пароль" v-model="objForLogin.Password">
                     <p class="error-text">{{ errorText }}</p>
                     <transition name="fade">
-                        <div class="next-button" v-if="objForLogin.Email!=='' && objForLogin.Password!==''" @click="login()">
+                        <div class="next-button" v-if="isLoginComleted" @click="login()">
                             <transition name="fade">
                                 <p v-if="!status">Войти</p>
                                 <p v-else>Выполняется запрос..</p>
@@ -106,6 +107,12 @@ export default {
   computed: {
     status: function () {
       return this.$store.getters['auth/getStatus']
+    },
+    isRegisterCompleted: function () {
+      return this.objForRegister.Password === this.objForRegister.PasswordRepeat && this.objForRegister.Password !== '' && this.objForRegister.NickName !== '' && this.objForRegister.Email !== ''
+    },
+    isLoginComleted: function () {
+      return this.objForLogin.Email !== '' && this.objForLogin.Password !== ''
     }
   },
   beforeCreate: function () {

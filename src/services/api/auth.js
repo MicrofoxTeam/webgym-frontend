@@ -14,6 +14,6 @@ export default {
 
   },
   getUser (creds) {
-    return Network.get('api/Account', creds)
+    return Network.get('api/Account/GetUserData', creds)
   }
 }

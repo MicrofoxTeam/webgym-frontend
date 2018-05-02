@@ -26,6 +26,7 @@ const actions = {
             commit(types.AUTH_SUCCESS, response.data)
             resolve()
           } else {
+            commit(types.AUTH_FAIL)
             reject(response.data.Description)
           }
         })
@@ -44,6 +45,7 @@ const actions = {
             commit(types.AUTH_SUCCESS, response.data)
             resolve()
           } else {
+            commit(types.AUTH_FAIL)
             reject(response.data.Description)
           }
         })
