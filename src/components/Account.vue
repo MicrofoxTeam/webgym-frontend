@@ -22,16 +22,15 @@
           <div class="input_wrapper">
             <input type="text" name="name" placeholder="Ник" v-model="user.NickName">
             <input type="text" name="name" placeholder="Имя" v-model="user.FullName">
-            <input type="email" name="name" placeholder="Email" v-model="user.Email">
             <input type="text" name="name" placeholder="Город" v-model="user.City">
             <textarea rows="3" name="name" placeholder="О себе" v-model="user.UserAbout"></textarea>
             <p class="titleMessage">Входящие сообщения от пользователей:</p>
             <div class="privacy-select">
               <div class="privacy-select--button privacy-select--button__left" v-bind:class="{'privacy-select--button__active': user.MessageBan===true}" v-on:click="user.MessageBan = true">
-                <p>Разрешить</p>
+                <p>Разрешено</p>
               </div>
               <div class="privacy-select--button privacy-select--button__right" v-bind:class="{'privacy-select--button__active': user.MessageBan===false}" v-on:click="user.MessageBan = false">
-                <p>Запретить</p>
+                <p>Запрещено</p>
               </div>
             </div>
             <div class="save-button noselect" @click="sendChanges()">

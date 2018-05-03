@@ -2,7 +2,6 @@ import * as types from '../mutation-types'
 import api from '../../services/api'
 
 const state = {
-  user: null,
   token: null,
   checkoutStatus: null,
   auth: false
@@ -10,7 +9,6 @@ const state = {
 
 // getters
 const getters = {
-  getUser: state => state.user,
   getToken: state => state.token,
   checkLogin: state => state.auth,
   getStatus: state => state.checkoutStatus
@@ -23,11 +21,11 @@ const actions = {
       commit(types.AUTH_REQUESTING)
       api.$auth.login(credentials)
         .then((response) => {
-          console.log(response)
           if (response.data.Success) {
             commit(types.AUTH_SUCCESS, response.data)
             resolve()
           } else {
+            commit(types.AUTH_FAIL)
             reject(response.data.Description)
           }
         })
@@ -46,6 +44,7 @@ const actions = {
             commit(types.AUTH_SUCCESS, response.data)
             resolve()
           } else {
+            commit(types.AUTH_FAIL)
             reject(response.data.Description)
           }
         })
@@ -56,7 +55,23 @@ const actions = {
     })
   },
   logout ({ commit, state }) {
-    commit(types.AUTH_LOGOUT)
+    return new Promise((resolve, reject) => {
+      commit(types.AUTH_REQUESTING)
+      api.$auth.logout({})
+        .then((response) => {
+          if (response.data.Success) {
+            commit(types.AUTH_LOGOUT)
+            resolve()
+          } else {
+            commit(types.AUTH_FAIL)
+            reject(response.data.Description)
+          }
+        })
+        .catch((data) => {
+          commit(types.AUTH_FAIL)
+          reject(data)
+        })
+    })
   }
 }
 
@@ -74,7 +89,6 @@ const mutations = {
     state.checkoutStatus = null
   },
   [types.AUTH_LOGOUT] (state) {
-    state.user = null
     state.token = null
     state.auth = false
     state.checkoutStatus = null
