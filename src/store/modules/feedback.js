@@ -2,9 +2,6 @@ import * as types from '../mutation-types'
 import api from '../../services/api'
 
 const state = {
-  token: null,
-  checkoutStatus: null,
-  auth: false
 }
 
 // getters
