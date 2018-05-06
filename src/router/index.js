@@ -4,6 +4,8 @@ import Register from '@/components/Register'
 import Trainings from '@/components/Trainings'
 import Create from '@/components/Create'
 import Account from '@/components/Account'
+import FeedBack from '@/components/account/FeedBack'
+import Messages from '@/components/account/Messages'
 
 import m from './middleware.js'
 
@@ -32,7 +34,21 @@ export default new Router({
       path: '/account',
       name: 'Account',
       beforeEnter: m.auth,
-      component: Account
+      component: Account,
+      children: [
+        {
+          path: 'messages',
+          name: 'Messages',
+          beforeEnter: m.auth,
+          component: Messages
+        },
+        {
+          path: 'feedback',
+          name: 'FeedBack',
+          beforeEnter: m.auth,
+          component: FeedBack
+        }
+      ]
     }
   ]
 })
