@@ -1,5 +1,8 @@
 <template>
     <div class="Messages">
+        <transition name="fade">
+            <preloader v-if="isLoaded"></preloader>
+        </transition>
         <transition-group name="fade" appear>
             <div class="message" v-for="message in messages" :key="message.Id">
                 <div class="message__avatar"></div>
@@ -20,6 +23,9 @@
 <script>
 export default {
   name: 'Messages',
+  components: {
+    'preloader': () => import('../preloader.vue')
+  },
   data () {
     return {
       data: ''
@@ -28,6 +34,10 @@ export default {
   computed: {
     messages: function () {
       return this.$store.getters['message/getMessages']
+    },
+    isLoaded: function () {
+      console.log(this.$store.getters['message/getStatus'])
+      return this.$store.getters['message/getStatus']
     }
   },
   beforeCreate: function () {

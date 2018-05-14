@@ -9,7 +9,8 @@ const state = {
 
 // getters
 const getters = {
-  getMessages: state => state.messages
+  getMessages: state => state.messages,
+  getStatus: state => state.checkoutStatus
 }
 
 // actions
@@ -46,6 +47,7 @@ const mutations = {
   },
   [types.MESSAGES_SUCCESS] (state, data) {
     state.messages = data.Messages.reverse()
+    state.checkoutStatus = null
   }
 }
 
