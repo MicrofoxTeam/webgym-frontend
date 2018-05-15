@@ -3,8 +3,19 @@
         <transition name="fade">
             <preloader v-if="isLoaded"></preloader>
         </transition>
+        <div class="new-message shadow-block" v-on:click="isOpened.find=true">
+            <p v-if="!isOpened.find">Новое сообщение</p>
+            <div class="user-find" v-if="isOpened.find">
+                <input placeholder="Кому написать.." v-model="findField.NickName" v-on:keyup="findByNick">
+                <div
+                        class="user-find__item shadow-block"
+                        v-for="item of usersByFind"
+                        v-bind:key="item"
+                >{{ item }}</div>
+            </div>
+        </div>
         <transition-group name="fade" appear>
-            <div class="message" v-for="message in messages" :key="message.Id">
+            <div class="message shadow-block" v-for="message in messages" :key="message.Id">
                 <div class="message__avatar"></div>
                 <div class="message__container">
                     <div class="message__wrapper">
@@ -28,7 +39,23 @@ export default {
   },
   data () {
     return {
-      data: ''
+      isOpened: {
+        find: false
+      },
+      findField: {},
+      usersByFind: []
+    }
+  },
+  methods: {
+    findByNick: function (e) {
+      this.usersByFind = ['Serega', 'Faustus']
+      this.$store.dispatch('message/searchUsers', this.findField)
+        .then(() => {
+          this.findField = {}
+        })
+        .catch((data) => {
+          alert(data)
+        })
     }
   },
   computed: {
@@ -36,8 +63,10 @@ export default {
       return this.$store.getters['message/getMessages']
     },
     isLoaded: function () {
-      console.log(this.$store.getters['message/getStatus'])
       return this.$store.getters['message/getStatus']
+    },
+    usersByFind1: function () {
+      return this.$store.getters['message/getUsersByFind']
     }
   },
   beforeCreate: function () {
@@ -92,6 +121,48 @@ export default {
                 .message__text {
                     padding-top: 10px;
                     font-size: 13px;
+                }
+            }
+        }
+    }
+
+    .new-message {
+        margin-top: 12px;
+        width: 100%;
+        min-height: 51px;
+        padding: 10px;
+        display: flex;
+        background-color: $background_module-color;
+        border-radius: 15px;
+
+        p {
+            margin: auto;
+        }
+
+        .user-find {
+            width: 100%;
+            background-color: $background_module-color;
+            padding: 10px;
+            border-radius: 6px;
+
+            input {
+                margin: 10px 0;
+            }
+            .user-find__item {
+                position: relative;
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 4px;
+                position: relative;
+                color: $text-color;
+                border-radius: 4px;
+                background-color: $background_module__light-color;
+
+                &:after {
+                    content: '↪';
+                    position: absolute;
+                    right: 10px;
+                    top: 8px;
                 }
             }
         }

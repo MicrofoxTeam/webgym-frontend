@@ -4,13 +4,15 @@ import api from '../../services/api'
 const state = {
   messages: [],
   currentPage: 1,
+  usersByFind: [],
   checkoutStatus: null
 }
 
 // getters
 const getters = {
   getMessages: state => state.messages,
-  getStatus: state => state.checkoutStatus
+  getStatus: state => state.checkoutStatus,
+  getUsersByFind: state => state.usersByFind
 }
 
 // actions
@@ -23,6 +25,25 @@ const actions = {
         .then((response) => {
           if (response.data.Success) {
             commit(types.MESSAGES_SUCCESS, response.data)
+            resolve()
+          } else {
+            commit(types.MESSAGES_FAIL)
+            reject(response.data.Description)
+          }
+        })
+        .catch((data) => {
+          commit(types.MESSAGES_FAIL)
+          reject(data)
+        })
+    })
+  },
+  searchUsers ({ commit, state }, credentials = {}) {
+    return new Promise((resolve, reject) => {
+      commit(types.MESSAGES_REQUESTING)
+      api.$message.searchUsers(credentials)
+        .then((response) => {
+          if (response.data.Success) {
+            commit(types.USERSEARCH_SUCCESS, response.data)
             resolve()
           } else {
             commit(types.MESSAGES_FAIL)
@@ -47,6 +68,10 @@ const mutations = {
   },
   [types.MESSAGES_SUCCESS] (state, data) {
     state.messages = data.Messages.reverse()
+    state.checkoutStatus = null
+  },
+  [types.USERSEARCH_SUCCESS] (state, data) {
+    state.usersByFind = data.Users
     state.checkoutStatus = null
   }
 }
