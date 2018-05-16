@@ -1,8 +1,8 @@
 <template>
     <div class="Messages">
-        <transition name="fade">
+        <!-- <transition name="fade">
             <preloader v-if="isLoaded"></preloader>
-        </transition>
+        </transition> -->
         <div class="new-message shadow-block" v-on:click="isOpened.find=true">
             <p v-if="!isOpened.find">Новое сообщение</p>
             <div class="user-find" v-if="isOpened.find">
@@ -15,14 +15,27 @@
             </div>
         </div>
         <transition-group name="fade" appear>
-            <div class="message shadow-block" v-for="message in messages" :key="message.Id" v-on:click="openActionMenu(message)">
-                <div class="message__avatar"></div>
+            <div class="message shadow-block" v-for="message in messages" :key="message.Id">
+                <div class="message__left">
+                    <div class="message__avatar"
+                         @click="openAnotherAccount(message)"
+                    ></div>
+                    <div class="message__more"
+                         @click="openActionMenu(message)"
+                    >
+                        <p>•••</p>
+                    </div>
+                </div>
                 <div class="message__container">
-                    <div class="message__wrapper">
+                    <div class="message__wrapper"
+                         @click="openAnotherAccount(message)"
+                    >
                         <div class="message__name">{{ message.UserName }}</div>
                         <div class="message__date">{{ message.Date }}</div>
                     </div>
-                    <div class="message__text">
+                    <div class="message__text"
+                         @click="openActionMenu(message)"
+                    >
                         {{ message.Text }}
                     </div>
                 </div>
@@ -32,7 +45,13 @@
                 :messageInfo="messageInfo"
                 v-if="isOpened.actionMenu"
                 @closeMe="isOpened.actionMenu = false"
+                @deleteMe="deleteMessage"
         ></actions-menu>
+        <another-account
+                :messageInfo="messageInfo"
+                v-if="isOpened.anotherAccount"
+                @closeMe="isOpened.anotherAccount = false"
+        ></another-account>
     </div>
 </template>
 
@@ -41,33 +60,53 @@ export default {
   name: 'Messages',
   components: {
     'preloader': () => import('../preloader.vue'),
-    'actions-menu': () => import('./actionsMenu.vue')
+    'actions-menu': () => import('./actionsMenu.vue'),
+    'another-account': () => import('./anotherAccount.vue')
   },
   data () {
     return {
       isOpened: {
         find: false,
-        actionMenu: false
+        actionMenu: false,
+        anotherAccount: false
       },
       findField: {},
-      messageInfo: {}
+      messageInfo: {},
+      timer: function () {}
     }
   },
   methods: {
     findByNick: function (e) {
-      if ((e.keyCode >= 33 && e.keyCode <= 126) || (e.keyCode >= 1040 && e.keyCode <= 1105)) {
-        console.log(e)
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
         this.$store.dispatch('message/searchUsers', this.findField)
           .then(() => {
-            this.findField = {}
           })
           .catch((data) => {
-            console.error(data)
+            if (data === 'Пользователи не найдены.') {
+              this.findField.NickName = ''
+              this.$store.commit('message/USERSEARCH_CLEAN')
+              alert('Пользователь с таким ником не найден')
+            }
           })
-      }
+      }, 1000)
     },
     openActionMenu: function (message) {
       this.isOpened.actionMenu = true
+      this.messageInfo = message
+    },
+    deleteMessage: function (id) {
+      this.$store.dispatch('message/removeMessage', {MessageId: id})
+        .then(() => {
+          console.log('Сообщение удалено')
+          this.$store.dispatch('message/getMessages')
+        })
+        .catch((data) => {
+          console.error(data)
+        })
+    },
+    openAnotherAccount: function (message) {
+      this.isOpened.anotherAccount = true
       this.messageInfo = message
     }
   },
@@ -112,6 +151,17 @@ export default {
                 height: 40px;
                 background-color: $accent-color;
                 border-radius: 20px;
+            }
+
+            .message__more {
+                display: flex;
+                min-height: 20px;
+                p {
+                    height: 5px;
+                    margin: auto;
+                    text-align: center;
+                    color: $secondary-color;
+                }
             }
 
             .message__container {

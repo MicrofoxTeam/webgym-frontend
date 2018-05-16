@@ -23,5 +23,10 @@ export default {
     body.Token = store.getters['auth/getToken']
     JSON.stringify(body)
     return HTTP.put(url, body)
+  },
+  delete (url, body) {
+    body.Token = store.getters['auth/getToken']
+    JSON.stringify(body)
+    return HTTP.delete(url, {params: body})
   }
 }

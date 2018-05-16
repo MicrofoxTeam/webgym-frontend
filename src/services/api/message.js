@@ -6,5 +6,8 @@ export default {
   },
   searchUsers (creds) {
     return Network.post('api/UserInfo/SearchUser', creds)
+  },
+  removeMessage (creds) {
+    return Network.delete('api/Message/RemoveMessage', creds)
   }
 }

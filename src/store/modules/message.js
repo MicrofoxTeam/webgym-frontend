@@ -55,6 +55,25 @@ const actions = {
           reject(data)
         })
     })
+  },
+  removeMessage ({ commit, state }, credentials = {}) {
+    console.log(credentials)
+    return new Promise((resolve, reject) => {
+      // commit(types.MESSAGES_REQUESTING)
+      api.$message.removeMessage(credentials)
+        .then((response) => {
+          if (response.data.Success) {
+            resolve()
+          } else {
+            commit(types.MESSAGES_FAIL)
+            reject(response.data.Description)
+          }
+        })
+        .catch((data) => {
+          commit(types.MESSAGES_FAIL)
+          reject(data)
+        })
+    })
   }
 }
 

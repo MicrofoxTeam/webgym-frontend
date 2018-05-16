@@ -1,10 +1,10 @@
 <template>
     <transition name="openBottom">
         <div class="actionsMenu shadow-block">
-            <h3 class="closeButton noselect" @click="close">ЗАКРЫТЬ</h3>
+            <h3 class="closeButton noselect" @click="closeMe">ЗАКРЫТЬ</h3>
             <div class="input_wrapper">
                 <p>Ответить {{ messageInfo.UserName }}</p>
-                <p>Удалить сообщение</p>
+                <p @click="deleteMe">Удалить сообщение</p>
                 <p>Пожаловаться</p>
             </div>
         </div>
@@ -18,8 +18,11 @@ export default {
     return {}
   },
   methods: {
-    close: function () {
+    closeMe: function () {
       this.$emit('closeMe')
+    },
+    deleteMe: function () {
+      this.$emit('deleteMe', this.messageInfo.Id)
     }
   }
 }

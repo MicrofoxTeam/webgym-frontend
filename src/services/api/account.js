@@ -18,5 +18,8 @@ export default {
   },
   changeMessageBan (creds) {
     return Network.put('api/Account/MessageBan', creds)
+  },
+  getAnotherUser (creds) {
+    return Network.post('api/UserInfo/CommonUserInfo', creds)
   }
 }
