@@ -5,6 +5,6 @@ export default {
     return Network.post('api/Message/GetMessages', creds)
   },
   searchUsers (creds) {
-    return Network.post('api/Message/GetMessages', creds)
+    return Network.post('api/UserInfo/SearchUser', creds)
   }
 }

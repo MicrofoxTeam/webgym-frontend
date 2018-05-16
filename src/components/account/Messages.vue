@@ -15,7 +15,7 @@
             </div>
         </div>
         <transition-group name="fade" appear>
-            <div class="message shadow-block" v-for="message in messages" :key="message.Id">
+            <div class="message shadow-block" v-for="message in messages" :key="message.Id" v-on:click="openActionMenu(message)">
                 <div class="message__avatar"></div>
                 <div class="message__container">
                     <div class="message__wrapper">
@@ -28,6 +28,11 @@
                 </div>
             </div>
         </transition-group>
+        <actions-menu
+                :messageInfo="messageInfo"
+                v-if="isOpened.actionMenu"
+                @closeMe="isOpened.actionMenu = false"
+        ></actions-menu>
     </div>
 </template>
 
@@ -35,27 +40,35 @@
 export default {
   name: 'Messages',
   components: {
-    'preloader': () => import('../preloader.vue')
+    'preloader': () => import('../preloader.vue'),
+    'actions-menu': () => import('./actionsMenu.vue')
   },
   data () {
     return {
       isOpened: {
-        find: false
+        find: false,
+        actionMenu: false
       },
       findField: {},
-      usersByFind: []
+      messageInfo: {}
     }
   },
   methods: {
     findByNick: function (e) {
-      this.usersByFind = ['Serega', 'Faustus']
-      this.$store.dispatch('message/searchUsers', this.findField)
-        .then(() => {
-          this.findField = {}
-        })
-        .catch((data) => {
-          alert(data)
-        })
+      if ((e.keyCode >= 33 && e.keyCode <= 126) || (e.keyCode >= 1040 && e.keyCode <= 1105)) {
+        console.log(e)
+        this.$store.dispatch('message/searchUsers', this.findField)
+          .then(() => {
+            this.findField = {}
+          })
+          .catch((data) => {
+            console.error(data)
+          })
+      }
+    },
+    openActionMenu: function (message) {
+      this.isOpened.actionMenu = true
+      this.messageInfo = message
     }
   },
   computed: {
@@ -65,11 +78,12 @@ export default {
     isLoaded: function () {
       return this.$store.getters['message/getStatus']
     },
-    usersByFind1: function () {
+    usersByFind: function () {
       return this.$store.getters['message/getUsersByFind']
     }
   },
   beforeCreate: function () {
+    this.$store.commit('message/USERSEARCH_CLEAN')
     this.$store.dispatch('message/getMessages')
   }
 }

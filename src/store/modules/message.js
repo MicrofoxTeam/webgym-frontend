@@ -39,7 +39,7 @@ const actions = {
   },
   searchUsers ({ commit, state }, credentials = {}) {
     return new Promise((resolve, reject) => {
-      commit(types.MESSAGES_REQUESTING)
+      // commit(types.MESSAGES_REQUESTING)
       api.$message.searchUsers(credentials)
         .then((response) => {
           if (response.data.Success) {
@@ -73,6 +73,9 @@ const mutations = {
   [types.USERSEARCH_SUCCESS] (state, data) {
     state.usersByFind = data.Users
     state.checkoutStatus = null
+  },
+  [types.USERSEARCH_CLEAN] (state) {
+    state.usersByFind = []
   }
 }
 
