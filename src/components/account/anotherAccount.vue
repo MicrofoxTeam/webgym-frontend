@@ -42,7 +42,7 @@ export default {
 
     .editPersonalData {
         width: 100vw;
-        height: 50vh;
+        height: 60vh;
         position: absolute;
         z-index: 100;
         background-color: $background_module-color;
@@ -139,9 +139,9 @@ export default {
         transition: transform .5s;
     }
     .openBottom-enter {
-        transform: translateY(50vh);
+        transform: translateY(60vh);
     }
     .openBottom-leave-to {
-        transform: translateY(50vh);
+        transform: translateY(60vh);
     }
 </style>

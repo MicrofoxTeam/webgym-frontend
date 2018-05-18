@@ -10,10 +10,10 @@
                 <p class="titleMessage">Входящие сообщения от пользователей:</p>
                 <div class="privacy-select">
                     <div class="privacy-select--button privacy-select--button__left" v-bind:class="{'privacy-select--button__active': user.MessageBan===true}" v-on:click="user.MessageBan = true">
-                        <p>Разрешено</p>
+                        <p>Запретить</p>
                     </div>
                     <div class="privacy-select--button privacy-select--button__right" v-bind:class="{'privacy-select--button__active': user.MessageBan===false}" v-on:click="user.MessageBan = false">
-                        <p>Запрещено</p>
+                        <p>Разрешить</p>
                     </div>
                 </div>
                 <div class="save-button noselect" @click="sendChanges()">

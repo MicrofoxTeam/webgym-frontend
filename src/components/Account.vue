@@ -24,7 +24,7 @@
           <p>Вопросы</p>
         </router-link>
       </div>
-      <router-view></router-view>
+      <router-view @scrollToMe="scrollToMe"></router-view>
       <message-field
               v-if="isMessageFieldOpen"
               @closeMe="isMessageFieldOpen = false"
@@ -60,6 +60,12 @@ export default {
             this.$router.push('/')
           }
         })
+    },
+    scrollToMe: function (offsetTop) {
+      console.log(this.$el)
+      setTimeout(() => {
+        this.$el.scrollTop = offsetTop + 10
+      }, 350)
     }
   },
   computed: {

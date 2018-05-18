@@ -3,9 +3,9 @@
         <div class="actionsMenu shadow-block">
             <h3 class="closeButton noselect" @click="closeMe">ЗАКРЫТЬ</h3>
             <div class="input_wrapper">
-                <p>Ответить {{ messageInfo.UserName }}</p>
+                <p @click="sendMe">Ответить {{ messageInfo.UserName }}</p>
                 <p @click="deleteMe">Удалить сообщение</p>
-                <p>Пожаловаться</p>
+                <p @click="deleteMe">Пожаловаться</p>
             </div>
         </div>
     </transition>
@@ -18,6 +18,9 @@ export default {
     return {}
   },
   methods: {
+    sendMe: function () {
+      this.$emit('sendMe', this.messageInfo.UserName)
+    },
     closeMe: function () {
       this.$emit('closeMe')
     },

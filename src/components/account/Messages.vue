@@ -1,16 +1,17 @@
 <template>
-    <div class="Messages">
+    <div class="Messages" id="messages">
         <!-- <transition name="fade">
             <preloader v-if="isLoaded"></preloader>
         </transition> -->
-        <div class="new-message shadow-block" v-on:click="isOpened.find=true">
+        <div class="new-message shadow-block" v-on:click="openFind">
             <p v-if="!isOpened.find">Новое сообщение</p>
             <div class="user-find" v-if="isOpened.find">
-                <input placeholder="Кому написать.." v-model="findField.NickName" v-on:keyup="findByNick">
+                <input placeholder="Кому написать.." v-model="findField.NickName" @keyup="findByNick" @focus="openFind">
                 <div
                         class="user-find__item shadow-block"
                         v-for="item of usersByFind"
-                        v-bind:key="item"
+                        :key="item"
+                        @click="openSendMessage({UserName: item})"
                 >{{ item }}</div>
             </div>
         </div>
@@ -46,12 +47,18 @@
                 v-if="isOpened.actionMenu"
                 @closeMe="isOpened.actionMenu = false"
                 @deleteMe="deleteMessage"
+                @sendMe="openSendMessage(messageInfo)"
         ></actions-menu>
         <another-account
                 :messageInfo="messageInfo"
                 v-if="isOpened.anotherAccount"
                 @closeMe="isOpened.anotherAccount = false"
         ></another-account>
+        <message-field
+                :messageInfo="messageInfo"
+                v-if="isOpened.messageField"
+                @closeMe="isOpened.messageField = false"
+        ></message-field>
     </div>
 </template>
 
@@ -61,6 +68,7 @@ export default {
   components: {
     'preloader': () => import('../preloader.vue'),
     'actions-menu': () => import('./actionsMenu.vue'),
+    'message-field': () => import('./messageField.vue'),
     'another-account': () => import('./anotherAccount.vue')
   },
   data () {
@@ -68,6 +76,7 @@ export default {
       isOpened: {
         find: false,
         actionMenu: false,
+        messageField: false,
         anotherAccount: false
       },
       findField: {},
@@ -89,9 +98,10 @@ export default {
               alert('Пользователь с таким ником не найден')
             }
           })
-      }, 1000)
+      }, 400)
     },
     openActionMenu: function (message) {
+      this.isOpened.anotherAccount = false
       this.isOpened.actionMenu = true
       this.messageInfo = message
     },
@@ -100,14 +110,28 @@ export default {
         .then(() => {
           console.log('Сообщение удалено')
           this.$store.dispatch('message/getMessages')
+          this.isOpened.actionMenu = false
         })
         .catch((data) => {
-          console.error(data)
+          alert(data)
         })
     },
     openAnotherAccount: function (message) {
+      this.isOpened.actionMenu = false
       this.isOpened.anotherAccount = true
       this.messageInfo = message
+    },
+    openFind: function () {
+      this.isOpened.find = true
+      this.$emit('scrollToMe', this.$el.offsetTop)
+    },
+    openSendMessage: function (message) {
+      if (message) {
+        this.messageInfo = message
+      }
+      this.isOpened.messageField = true
+      this.isOpened.actionMenu = false
+      this.isOpened.anotherAccount = false
     }
   },
   computed: {
