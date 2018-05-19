@@ -1,0 +1,68 @@
+<template>
+  <transition name="fade">
+    <div class="trainings">
+      <router-link to="create">
+        <newTraining></newTraining>
+      </router-link>
+      <div class="training shadow-block"
+           v-for="(value, key) in programs"
+           :key="key"
+           @click="clean"
+      >
+        <p class="noselect">{{ value.name }}</p>
+      </div>
+    </div>
+  </transition>
+</template>
+
+<script>
+export default {
+  name: 'Programs',
+  components: {
+    'newTraining': () => import('./trainings/new-training.vue')
+  },
+  data () {
+    return {
+    }
+  },
+  methods: {
+    clean: function () {
+      this.$store.commit('programs/DELETEALL_PROGRAMS')
+    }
+  },
+  computed: {
+    programs: function () {
+      return this.$store.getters['programs/getPrograms']
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  @import '../main.scss';
+  .trainings {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 5.5vw;
+    padding-bottom: calc(100vw / 6.25);
+    position: relative;
+    z-index: 1;
+    overflow-y: scroll;
+
+    $cardWidth: calc(100vw - 11vw);
+    $cardHeight: calc(#{$cardWidth} * 0.19);
+    .training {
+      width: $cardWidth;
+      height: $cardHeight;
+      margin: 15px auto 0 auto;
+      position: relative;
+      background-color: $background_module-color;
+      border-radius: 15px;
+      p {
+        padding: calc((#{$cardHeight} - 23px) / 2) ;
+        color: $secondary-color;
+        font-size: 20px;
+      }
+    }
+  }
+</style>

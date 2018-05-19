@@ -16,7 +16,7 @@
         <p class="noselect">КЛУБЫ</p>
       </div>
     </router-link>
-    <router-link to="/trainings">
+    <router-link to="/programs">
       <div class="menu_button">
         <div class="menu_image">
           <img src="../assets/training.png">

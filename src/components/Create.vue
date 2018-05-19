@@ -1,28 +1,29 @@
 <template>
   <div class="Create">
     <div class="day-selector--wrapper">
+      <input v-model="program.name" placeholder="Название программы.."/>
       <div>
-        <div class="day-selector filled">
+        <router-link to="/create/1" class="day-selector">
           <p>ПН</p>
-        </div>
-        <div class="day-selector filled">
+        </router-link>
+        <router-link to="/create/2" class="day-selector">
           <p>ВТ</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/create/3" class="day-selector">
           <p>СР</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/create/4" class="day-selector">
           <p>ЧТ</p>
-        </div>
-        <div class="day-selector active">
+        </router-link>
+        <router-link to="/create/5" class="day-selector ">
           <p>ПТ</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/create/6" class="day-selector">
           <p>СБ</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/create/7" class="day-selector">
           <p>ВС</p>
-        </div>
+        </router-link>
       </div>
 
       <div>
@@ -32,7 +33,7 @@
         <div class="day-selector">
           <p>ВТ</p>
         </div>
-        <div class="day-selector filled">
+        <div class="day-selector">
           <p>СР</p>
         </div>
         <div class="day-selector">
@@ -44,21 +45,45 @@
         <div class="day-selector">
           <p>СБ</p>
         </div>
-        <div class="day-selector filled">
+        <div class="day-selector">
           <p>ВС</p>
         </div>
       </div>
+      <div class="next-button" @click="saveProgram">
+        <p>Сохранить</p>
+      </div>
     </div>
+    <router-view
+            :localId="localId"
+    ></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Create',
+  name: 'newProgram',
   data () {
     return {
-      data: ''
+      data: '',
+      localId: '',
+      program: {
+        name: '',
+        type: '1',
+        trainingDays: {}
+      }
     }
+  },
+  methods: {
+    saveProgram: function () {
+      this.$store.commit('programs/CREATE_PROGRAM', {
+        localId: this.localId,
+        program: this.program
+      })
+      this.$router.push('programs')
+    }
+  },
+  created: function () {
+    this.localId = String(new Date().getTime()).slice(-8)
   }
 }
 </script>
@@ -91,13 +116,15 @@ export default {
         border-radius: 12px;
         border: 2px solid $secondary-color;
         display: flex;
+        color: $secondary-color;
 
         p {
           margin: auto;
         }
 
-        &.active {
+        &.router-link-active {
           border: 2px solid $accent-color;
+          color: $text-color;
         }
 
         &.filled {

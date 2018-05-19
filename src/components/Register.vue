@@ -83,7 +83,7 @@ export default {
       this.$store.dispatch('auth/login', this.objForLogin)
         .then(() => {
           if (this.$store.getters['auth/checkLogin']) {
-            this.$router.push('trainings')
+            this.$router.push('programs')
           }
         })
         .catch((data) => {
@@ -95,7 +95,7 @@ export default {
       this.$store.dispatch('auth/register', this.objForRegister)
         .then(() => {
           if (this.$store.getters['auth/checkLogin']) {
-            this.$router.push('trainings')
+            this.$router.push('programs')
           }
         })
         .catch((data) => {

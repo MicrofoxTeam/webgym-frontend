@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '@/components/Register'
-import Trainings from '@/components/Trainings'
+import Programs from '@/components/Programs'
 import Create from '@/components/Create'
+import Day from '@/components/create/day'
 import Account from '@/components/Account'
 import FeedBack from '@/components/account/FeedBack'
 import Messages from '@/components/account/Messages'
@@ -19,16 +20,30 @@ export default new Router({
       component: Register
     },
     {
-      path: '/trainings',
-      name: 'Trainings',
+      path: '/programs',
+      name: 'Programs',
       beforeEnter: m.auth,
-      component: Trainings
+      component: Programs
+    },
+    {
+      path: '/trainings',
+      name: 'Programs',
+      beforeEnter: m.auth,
+      component: Programs
     },
     {
       path: '/create',
       name: 'Create',
       beforeEnter: m.auth,
-      component: Create
+      component: Create,
+      children: [
+        {
+          path: ':day',
+          name: 'day',
+          beforeEnter: m.auth,
+          component: Day
+        }
+      ]
     },
     {
       path: '/account',

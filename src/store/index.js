@@ -7,6 +7,7 @@ import cordova from './modules/cordova'
 import account from './modules/account'
 import feedback from './modules/feedback'
 import message from './modules/message'
+import programs from './modules/programs'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     cordova,
     account,
     feedback,
-    message
+    message,
+    programs
   },
   plugins: [createPersistedState()]
 })
