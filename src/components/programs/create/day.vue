@@ -16,7 +16,7 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      console.log(to.params.day)
+      console.log(this.Vue)
     }
   },
   computed: {
@@ -25,7 +25,6 @@ export default {
     }
   },
   created: function () {
-    console.log()
   }
 }
 </script>
@@ -39,7 +38,6 @@ export default {
     padding-bottom: calc(100vw / 6.25);
     position: relative;
     z-index: 1;
-
     h1 {
       text-align: center;
     }

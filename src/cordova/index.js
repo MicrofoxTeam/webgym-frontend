@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import store from '../store'
+import router from '../router'
 import * as types from '../store/mutation-types'
 
 import push from './push.js'
@@ -25,6 +26,11 @@ let onOffline = () => {
 
 //  cordova.fireDocumentEvent('backbutton'); for testing in console
 let onBackbutton = () => {
+  let path = router.currentRoute.path.split('/')
+  if (path.length > 2) {
+    path.pop()
+    router.push(path.join('/'))
+  }
 }
 
 let onPause = () => {
