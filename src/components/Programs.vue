@@ -1,9 +1,6 @@
 <template>
   <transition name="fade">
     <div class="trainings">
-      <router-link to="create">
-        <newTraining></newTraining>
-      </router-link>
       <div class="training shadow-block"
            v-for="(value, key) in programs"
            :key="key"
@@ -11,6 +8,11 @@
       >
         <p class="noselect">{{ value.name }}</p>
       </div>
+      <router-link to="programs/create">
+        <div class="training shadow-block">
+          <p class="noselect">Создать программу..</p>
+        </div>
+      </router-link>
     </div>
   </transition>
 </template>
@@ -18,9 +20,6 @@
 <script>
 export default {
   name: 'Programs',
-  components: {
-    'newTraining': () => import('./trainings/new-training.vue')
-  },
   data () {
     return {
     }

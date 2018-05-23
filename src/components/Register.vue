@@ -117,7 +117,7 @@ export default {
   },
   beforeCreate: function () {
     if (this.$store.getters['auth/checkLogin']) {
-      this.$router.push('trainings')
+      this.$router.push('programs')
     }
   }
 }

@@ -3,25 +3,25 @@
     <div class="day-selector--wrapper">
       <input v-model="program.name" placeholder="Название программы.."/>
       <div>
-        <router-link to="/create/1" class="day-selector">
+        <router-link to="/programs/create/1" class="day-selector">
           <p>ПН</p>
         </router-link>
-        <router-link to="/create/2" class="day-selector">
+        <router-link to="/programs/create/2" class="day-selector">
           <p>ВТ</p>
         </router-link>
-        <router-link to="/create/3" class="day-selector">
+        <router-link to="/programs/create/3" class="day-selector">
           <p>СР</p>
         </router-link>
-        <router-link to="/create/4" class="day-selector">
+        <router-link to="/programs/create/4" class="day-selector">
           <p>ЧТ</p>
         </router-link>
-        <router-link to="/create/5" class="day-selector ">
+        <router-link to="/programs/create/5" class="day-selector ">
           <p>ПТ</p>
         </router-link>
-        <router-link to="/create/6" class="day-selector">
+        <router-link to="/programs/create/6" class="day-selector">
           <p>СБ</p>
         </router-link>
-        <router-link to="/create/7" class="day-selector">
+        <router-link to="/programs/create/7" class="day-selector">
           <p>ВС</p>
         </router-link>
       </div>
@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../main.scss';
+  @import '../../main.scss';
   .Create {
     width: 100vw;
     height: 100vh;

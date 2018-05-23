@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import store from '../store'
 import * as types from '../store/mutation-types'
 
@@ -24,7 +25,6 @@ let onOffline = () => {
 
 //  cordova.fireDocumentEvent('backbutton'); for testing in console
 let onBackbutton = () => {
-  console.log('Backbutton')
 }
 
 let onPause = () => {
@@ -41,3 +41,5 @@ document.addEventListener('offline', onOffline, false)
 document.addEventListener('backbutton', onBackbutton, false)
 document.addEventListener('pause', onPause, false)
 document.addEventListener('resumen', onResumen, false)
+
+export default Vue.Cordova

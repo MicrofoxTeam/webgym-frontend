@@ -103,6 +103,7 @@ export default {
       bottom: 0;
       left: 0;
       z-index: 4;
+      transform: translateX(40vw);
     }
 
     @for $i from 1 through 5 {

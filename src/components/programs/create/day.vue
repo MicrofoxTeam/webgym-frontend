@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../main.scss';
+  @import '../../../main.scss';
   .day {
     width: 100vw;
     height: 100vh;
@@ -39,5 +39,9 @@ export default {
     padding-bottom: calc(100vw / 6.25);
     position: relative;
     z-index: 1;
+
+    h1 {
+      text-align: center;
+    }
   }
 </style>
