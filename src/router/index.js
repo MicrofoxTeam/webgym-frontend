@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Register from '@/components/Register'
 import Programs from '@/components/Programs'
 import Create from '@/components/programs/Create'
+import Program from '@/components/programs/Program'
 import Day from '@/components/programs/create/day'
 import Account from '@/components/Account'
 import FeedBack from '@/components/account/FeedBack'
@@ -34,10 +35,16 @@ export default new Router({
       ]
     },
     {
-      path: '/programs',
+      path: '/programs/',
       name: 'Programs',
       beforeEnter: m.auth,
       component: Programs
+    },
+    {
+      path: '/programs/:name',
+      name: 'Program',
+      beforeEnter: m.auth,
+      component: Program
     },
     {
       path: '/account',

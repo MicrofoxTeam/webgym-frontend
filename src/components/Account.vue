@@ -5,7 +5,9 @@
         <div class="avatar">
         </div>
         <div class="user_wrapper">
-          <div class="name_wrapper">
+          <div class="name_wrapper"
+            @click="clean"
+          >
             <h1>{{ user.NickName }}</h1>
             <h2>{{ user.Email }}</h2>
             <h2>{{ user.FullName }}</h2>
@@ -66,6 +68,9 @@ export default {
       setTimeout(() => {
         this.$el.scrollTop = offsetTop + 10
       }, 350)
+    },
+    clean: function () {
+      this.$store.commit('programs/DELETEALL_PROGRAMS')
     }
   },
   computed: {

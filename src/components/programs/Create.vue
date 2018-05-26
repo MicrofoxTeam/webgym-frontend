@@ -27,41 +27,42 @@
       </div>
 
       <div>
-        <div class="day-selector ">
+        <router-link to="/programs/create/8" class="day-selector">
           <p>ПН</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/programs/create/9" class="day-selector">
           <p>ВТ</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/programs/create/10" class="day-selector">
           <p>СР</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/programs/create/11" class="day-selector">
           <p>ЧТ</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/programs/create/12" class="day-selector ">
           <p>ПТ</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/programs/create/13" class="day-selector">
           <p>СБ</p>
-        </div>
-        <div class="day-selector">
+        </router-link>
+        <router-link to="/programs/create/14" class="day-selector">
           <p>ВС</p>
-        </div>
+        </router-link>
       </div>
-      <div class="next-button" @click="saveProgram">
-        <p>Сохранить</p>
-      </div>
+    </div>
+    <div class="save-button" @click="saveProgram">
+      <p>Сохранить</p>
     </div>
     <router-view
             :localId="localId"
+            :trainingDays="program.trainingDays"
     ></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'newProgram',
+  name: 'Create',
   data () {
     return {
       data: '',
@@ -69,7 +70,50 @@ export default {
       program: {
         name: '',
         type: '1',
-        trainingDays: {}
+        trainingDays: {
+          '1': {
+            Exercises: []
+          },
+          '2': {
+            Exercises: []
+          },
+          '3': {
+            Exercises: []
+          },
+          '4': {
+            Exercises: []
+          },
+          '5': {
+            Exercises: []
+          },
+          '6': {
+            Exercises: []
+          },
+          '7': {
+            Exercises: []
+          },
+          '8': {
+            Exercises: []
+          },
+          '9': {
+            Exercises: []
+          },
+          '10': {
+            Exercises: []
+          },
+          '11': {
+            Exercises: []
+          },
+          '12': {
+            Exercises: []
+          },
+          '13': {
+            Exercises: []
+          },
+          '14': {
+            Exercises: []
+          }
+        }
       }
     }
   },
@@ -79,7 +123,7 @@ export default {
         localId: this.localId,
         program: this.program
       })
-      this.$router.push('programs')
+      this.$router.push('/programs')
     }
   },
   created: function () {
@@ -132,6 +176,22 @@ export default {
           background-color: $accent-color;
         }
       }
+    }
+  }
+
+  .save-button {
+    transition: all .2s;
+    width: 100%;
+    max-width: 300px;
+    height: 48px;
+    margin: 0 auto;
+    border: 1px solid $accent-color;
+    display: flex;
+    border-radius: 12px;
+    color: $accent-color;
+
+    p {
+      margin: auto;
     }
   }
 

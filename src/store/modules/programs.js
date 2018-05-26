@@ -7,7 +7,9 @@ const state = {
 
 // getters
 const getters = {
-  getPrograms: state => state.programs
+  getPrograms: state => state.programs,
+  getProgram: state => id => state.programs[id],
+  getDays: state => id => state.programs[id].trainingDays
 }
 
 // actions

@@ -1,15 +1,17 @@
 <template>
   <transition name="fade">
     <div class="trainings">
-      <div class="training shadow-block"
-           v-for="(value, key) in programs"
-           :key="key"
-           @click="clean"
+      <router-link :to="'programs/'+key"
+         v-for="(value, key) in programs"
+         :key="key"
+         @click="clean"
       >
-        <p class="noselect">{{ value.name }}</p>
-      </div>
-      <router-link to="programs/create">
         <div class="training shadow-block">
+          <p class="noselect">{{ value.name }}</p>
+        </div>
+      </router-link>
+      <router-link to="programs/create">
+        <div class="training new shadow-block">
           <p class="noselect">Создать программу..</p>
         </div>
       </router-link>
@@ -59,9 +61,12 @@ export default {
       border-radius: 15px;
       p {
         padding: calc((#{$cardHeight} - 23px) / 2) ;
-        color: $secondary-color;
+        color: $text-color;
         font-size: 20px;
       }
+    }
+    .new p {
+      color: $secondary-color;
     }
   }
 </style>
