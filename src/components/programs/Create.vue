@@ -3,50 +3,12 @@
     <div class="day-selector--wrapper">
       <input v-model="program.name" placeholder="Название программы.."/>
       <div>
-        <router-link to="/programs/create/1" class="day-selector">
-          <p>ПН</p>
-        </router-link>
-        <router-link to="/programs/create/2" class="day-selector">
-          <p>ВТ</p>
-        </router-link>
-        <router-link to="/programs/create/3" class="day-selector">
-          <p>СР</p>
-        </router-link>
-        <router-link to="/programs/create/4" class="day-selector">
-          <p>ЧТ</p>
-        </router-link>
-        <router-link to="/programs/create/5" class="day-selector ">
-          <p>ПТ</p>
-        </router-link>
-        <router-link to="/programs/create/6" class="day-selector">
-          <p>СБ</p>
-        </router-link>
-        <router-link to="/programs/create/7" class="day-selector">
-          <p>ВС</p>
-        </router-link>
-      </div>
-
-      <div>
-        <router-link to="/programs/create/8" class="day-selector">
-          <p>ПН</p>
-        </router-link>
-        <router-link to="/programs/create/9" class="day-selector">
-          <p>ВТ</p>
-        </router-link>
-        <router-link to="/programs/create/10" class="day-selector">
-          <p>СР</p>
-        </router-link>
-        <router-link to="/programs/create/11" class="day-selector">
-          <p>ЧТ</p>
-        </router-link>
-        <router-link to="/programs/create/12" class="day-selector ">
-          <p>ПТ</p>
-        </router-link>
-        <router-link to="/programs/create/13" class="day-selector">
-          <p>СБ</p>
-        </router-link>
-        <router-link to="/programs/create/14" class="day-selector">
-          <p>ВС</p>
+        <router-link :to="'/programs/create/'+day.number" class="day-selector"
+                     v-for="day in generator"
+                     :key="day.number"
+                     :class="{ 'filled':  program.trainingDays[day.number].Exercises.length !== 0}"
+        >
+          <p>{{ day.day }}</p>
         </router-link>
       </div>
     </div>
@@ -70,50 +32,7 @@ export default {
       program: {
         name: '',
         type: '1',
-        trainingDays: {
-          '1': {
-            Exercises: []
-          },
-          '2': {
-            Exercises: []
-          },
-          '3': {
-            Exercises: []
-          },
-          '4': {
-            Exercises: []
-          },
-          '5': {
-            Exercises: []
-          },
-          '6': {
-            Exercises: []
-          },
-          '7': {
-            Exercises: []
-          },
-          '8': {
-            Exercises: []
-          },
-          '9': {
-            Exercises: []
-          },
-          '10': {
-            Exercises: []
-          },
-          '11': {
-            Exercises: []
-          },
-          '12': {
-            Exercises: []
-          },
-          '13': {
-            Exercises: []
-          },
-          '14': {
-            Exercises: []
-          }
-        }
+        trainingDays: {}
       }
     }
   },
@@ -126,8 +45,26 @@ export default {
       this.$router.push('/programs')
     }
   },
+  computed: {
+    generator: function () {
+      let mass = []
+      let days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'Сб', 'ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'Сб', 'ВС']
+      for (let i = 1; i < 15; i++) {
+        mass.push({
+          number: i,
+          day: days[i - 1]
+        })
+      }
+      return mass
+    }
+  },
   created: function () {
     this.localId = String(new Date().getTime()).slice(-8)
+    for (let i = 1; i < 15; i++) {
+      this.program.trainingDays[i] = {
+        Exercises: []
+      }
+    }
   }
 }
 </script>
@@ -152,6 +89,7 @@ export default {
     > div {
       display: flex;
       justify-content: space-around;
+      flex-wrap: wrap;
       margin-top: 2.4px;
 
       .day-selector {
@@ -161,6 +99,8 @@ export default {
         border: 2px solid $secondary-color;
         display: flex;
         color: $secondary-color;
+        margin-top: 5px;
+        transition: .2s;
 
         p {
           margin: auto;
@@ -173,7 +113,12 @@ export default {
 
         &.filled {
           border: 2px solid $accent-color;
-          background-color: $accent-color;
+          color: $accent-color;
+
+          &.router-link-active {
+            background-color: transparent;
+            color: $text-color;
+          }
         }
       }
     }

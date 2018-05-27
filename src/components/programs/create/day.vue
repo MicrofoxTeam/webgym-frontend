@@ -1,12 +1,16 @@
 <template>
-  <transition name="fade">
     <div class="day">
-      <div class="card shadow-block"
+      <!--<div class="card shadow-block"
            v-for="(value, key) in trainingDays[this.currentDay].Exercises"
            :key="key"
       >
         <p>{{ value.Name }}</p>
-      </div>
+      </div>-->
+      <exercise
+              v-for="(value, key) in trainingDays[this.currentDay].Exercises"
+              :key="key"
+              :exercise="value"
+      ></exercise>
       <!---->
       <div class="card new shadow-block"
            v-if="!isOpened.sourceSelect"
@@ -36,7 +40,7 @@
         <div class="elem"
              @click="addDay('Кардио')"
         >
-          <p>Кард</p>
+          <p>♥</p>
         </div>
         <div class="elem"
              @click="addDay('Силовое')"
@@ -50,13 +54,15 @@
         </div>
       </div>
     </div>
-  </transition>
 </template>
 
 <script>
 export default {
   name: 'day',
   props: ['localId', 'trainingDays'],
+  components: {
+    'exercise': () => import('./exercise.vue')
+  },
   data () {
     return {
       isOpened: {
@@ -87,6 +93,7 @@ export default {
     },
     openSourceSelect: function () {
       this.isOpened.sourceSelect = true
+      this.isOpened.self = true
     },
     openSelf: function () {
       this.isOpened.self = true
@@ -114,7 +121,6 @@ export default {
     height: 100vh;
     padding-top: 5.5vw;
     padding-bottom: calc(100vw / 6.25);
-    position: relative;
     z-index: 1;
     h1 {
       text-align: center;
@@ -143,12 +149,12 @@ export default {
       width: 300px;
       margin: 10px auto;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       .elem {
         background-color: $accent-color;
-        width: 80px;
-        height: 80px;
-        border-radius: 40px;
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
         display: flex;
 
         p {

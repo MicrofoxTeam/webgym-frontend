@@ -43,7 +43,7 @@ export default {
   @import '../main.scss';
   .trainings {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     padding-top: 5.5vw;
     padding-bottom: calc(100vw / 6.25);
     position: relative;
