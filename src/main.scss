@@ -104,6 +104,13 @@ textarea {
                                   supported by Chrome and Opera */
 }
 
+.closeButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: $secondary-color;
+    font-size: 12px;
+}
 
 .shadow-block {
   box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);

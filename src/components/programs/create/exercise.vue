@@ -3,7 +3,7 @@
         <div class="exercise"
              @click="open"
         >
-            <p>{{ exercise.Name }}</p>
+            <p>{{ exercise.Type }}</p>
         </div>
         <sets
              v-if="isOpened.sets"
@@ -35,9 +35,15 @@ export default {
     },
     close: function () {
       this.isOpened.sets = false
+      if (this.exercise.Name === '') {
+        this.$emit('unset')
+      }
     }
   },
   created: function () {
+    if (this.exercise.Name === '') {
+      this.isOpened.sets = true
+    }
   }
 }
 </script>

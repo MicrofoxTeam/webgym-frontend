@@ -10,6 +10,7 @@
               v-for="(value, key) in trainingDays[this.currentDay].Exercises"
               :key="key"
               :exercise="value"
+              @unset="deleteLastDay"
       ></exercise>
       <!---->
       <div class="card new shadow-block"
@@ -38,17 +39,17 @@
            v-if="isOpened.self"
       >
         <div class="elem"
-             @click="addDay('Кардио')"
-        >
-          <p>♥</p>
-        </div>
-        <div class="elem"
-             @click="addDay('Силовое')"
+             @click="addDay('1')"
         >
           <p>Сил</p>
         </div>
         <div class="elem"
-             @click="addDay('Workout')"
+             @click="addDay('2')"
+        >
+          <p>♥</p>
+        </div>
+        <div class="elem"
+             @click="addDay('3')"
         >
           <p>Work</p>
         </div>
@@ -86,10 +87,15 @@ export default {
   methods: {
     addDay: function (type) {
       this.trainingDays[this.currentDay].Exercises.push({
-        Name: type,
+        Name: '',
+        Type: type,
         Sets: []
       })
       this.closeAll()
+    },
+    deleteLastDay: function () {
+      console.log('unset')
+      this.trainingDays[this.currentDay].Exercises.pop()
     },
     openSourceSelect: function () {
       this.isOpened.sourceSelect = true

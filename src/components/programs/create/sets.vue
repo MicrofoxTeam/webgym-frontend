@@ -2,7 +2,7 @@
     <transition name="openBottom">
         <div class="sets shadow-block">
             <h3 class="closeButton noselect" @click="close">ЗАКРЫТЬ</h3>
-            <p>{{ exercise.Name }}</p>
+            <p>{{ exercise.Type }}</p>
         </div>
     </transition>
 </template>
@@ -38,14 +38,6 @@ export default {
       top: 0;
       left: 0;
       overflow-y: scroll;
-
-      .closeButton {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          color: $secondary-color;
-          font-size: 12px;
-      }
   }
 
   .openBottom-enter-active, .openBottom-leave-active {
