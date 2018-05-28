@@ -1,11 +1,5 @@
 <template>
     <div class="day">
-      <!--<div class="card shadow-block"
-           v-for="(value, key) in trainingDays[this.currentDay].Exercises"
-           :key="key"
-      >
-        <p>{{ value.Name }}</p>
-      </div>-->
       <exercise
               v-for="(value, key) in trainingDays[this.currentDay].Exercises"
               :key="key"

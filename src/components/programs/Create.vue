@@ -61,9 +61,7 @@ export default {
   created: function () {
     this.localId = String(new Date().getTime()).slice(-8)
     for (let i = 1; i < 15; i++) {
-      this.program.trainingDays[i] = {
-        Exercises: []
-      }
+      this.$set(this.program.trainingDays, i, {Exercises: []})
     }
   }
 }

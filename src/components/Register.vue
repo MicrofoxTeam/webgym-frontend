@@ -230,7 +230,7 @@ export default {
 }
 
 .fade-enter-active, .fade-leave-active {
-    transition: opaCity .5s;
+    transition: opacity .5s;
 }
 .fade-enter, .fade-leave-to {
     opaCity: 0;
