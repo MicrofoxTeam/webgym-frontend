@@ -9,8 +9,8 @@
       <exercise
               v-for="(value, key) in trainingDays[this.currentDay].Exercises"
               :key="key"
+              :number="key"
               :exercise="value"
-              @unset="deleteLastDay"
       ></exercise>
       <!---->
       <div class="card new shadow-block"
@@ -92,10 +92,6 @@ export default {
         Sets: []
       })
       this.closeAll()
-    },
-    deleteLastDay: function () {
-      console.log('unset')
-      this.trainingDays[this.currentDay].Exercises.pop()
     },
     openSourceSelect: function () {
       this.isOpened.sourceSelect = true

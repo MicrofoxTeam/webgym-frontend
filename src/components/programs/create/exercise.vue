@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="exercise"
+        <div class="exercise shadow-block"
              @click="open"
         >
-            <p>{{ exercise.Type }}</p>
+            <p>{{ exercise.Name }}</p>
         </div>
         <sets
              v-if="isOpened.sets"
@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'exercise',
-  props: ['exercise'],
+  props: ['exercise', 'number'],
   components: {
     'sets': () => import('./sets.vue')
   },
@@ -36,7 +36,7 @@ export default {
     close: function () {
       this.isOpened.sets = false
       if (this.exercise.Name === '') {
-        this.$emit('unset')
+        this.exercise.Name = 'Упражнение ' + (this.number + 1)
       }
     }
   },
