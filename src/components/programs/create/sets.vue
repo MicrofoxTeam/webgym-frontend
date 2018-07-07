@@ -1,7 +1,7 @@
 <template>
     <transition name="openBottom">
         <div class="sets shadow-block">
-            <h3 class="closeButton noselect" @click="close">ЗАКРЫТЬ</h3>
+            <h3 class="closeButton noselect" @click="close">СОХРАНИТЬ</h3>
             <div class="sets__wrapper">
                 <input v-model="exercise.Name" placeholder="Название упражнения..">
                 <set
@@ -119,13 +119,13 @@ export default {
               width: 300px;
               height: 100px;
               display: flex;
-              margin-top: 40px;
+              margin-top: 80px;
               position: relative;
               &:before {
                   content: '';
                   position: absolute;
-                  top: -20px;
-                  background-color: $background_module__light-color;
+                  top: -40px;
+                  background-color: $accent-color;
                   width: 300px;
                   height: 1px;
                   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.4);
