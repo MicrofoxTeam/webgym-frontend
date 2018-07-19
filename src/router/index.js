@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Register from '@/components/Register'
+import Auth from '@/components/Auth'
 import Programs from '@/components/Programs'
 import Create from '@/components/programs/Create'
 import Program from '@/components/programs/Program'
@@ -17,8 +17,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Register',
-      component: Register
+      name: 'Auth',
+      component: Auth
     },
     {
       path: '/programs/create',
