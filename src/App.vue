@@ -32,6 +32,8 @@ export default {
     padding: 0;
     box-sizing: border-box;
     font-family: 'roxima Nova Light', sans-serif;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     background: $background-color;

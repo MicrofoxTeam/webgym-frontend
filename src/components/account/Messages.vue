@@ -66,7 +66,7 @@
 export default {
   name: 'Messages',
   components: {
-    'preloader': () => import('../preloader.vue'),
+    'preloader': () => import('../elements/preloader.vue'),
     'actions-menu': () => import('./actionsMenu.vue'),
     'message-field': () => import('./messageField.vue'),
     'another-account': () => import('./anotherAccount.vue')
