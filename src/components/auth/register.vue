@@ -24,7 +24,11 @@
              v-bind:class="{
                     'left': objForRegister.Sex === '1'
              }"
-        ></div>
+        >
+            <div>
+                <img src="../../assets/female.png">
+            </div>
+        </div>
         <div class="slider"
              v-bind:class="{
                     'left': objForRegister.Sex === '1',
@@ -49,7 +53,11 @@
              v-bind:class="{
                     'right': objForRegister.Sex === '2'
              }"
-        ></div>
+        >
+            <div>
+                <img src="../../assets/male.png">
+            </div>
+        </div>
     </div>
     <div class="animate bubbly-button"
         v-if="objForRegister.NickName &&

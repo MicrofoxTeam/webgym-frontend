@@ -129,11 +129,21 @@ a {
         height: 50px;
         border-radius: 25px;
         background-color: $background_module__light-color;
+        display: flex;
         &.left {
             background-color: #b5304d;
         }
         &.right {
             background-color: #1b45c9;
+        }
+
+        > div {
+            margin: auto;
+            width: 25px;
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
     }
 
