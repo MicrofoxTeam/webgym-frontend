@@ -155,7 +155,8 @@ export default {
 <style lang="scss" scoped>
     @import '../../main.scss';
     .Messages {
-        width: 310px;
+        width: 90%;
+        max-width: 400px;
         height: auto;
         margin: 10px auto;
         color: $text-color;
@@ -167,7 +168,7 @@ export default {
             padding: 10px;
             display: flex;
             flex-direction: row;
-            background-color: $background_module-color;
+            background-color: $background_module__light-color;
             border-radius: 15px;
 
             .message__avatar {
@@ -230,12 +231,12 @@ export default {
         .user-find {
             width: 100%;
             background-color: $background_module-color;
-            padding: 10px;
             border-radius: 6px;
 
             input {
-                margin: 10px 0;
+                margin: 0;
             }
+
             .user-find__item {
                 position: relative;
                 width: 100%;
@@ -251,6 +252,10 @@ export default {
                     position: absolute;
                     right: 10px;
                     top: 8px;
+                }
+
+                &:nth-child(2) {
+                    margin-top: 4px;
                 }
             }
         }

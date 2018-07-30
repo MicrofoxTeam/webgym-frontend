@@ -1,6 +1,6 @@
 <template>
     <transition name="openBottom">
-        <div class="editPersonalData">
+        <div class="editPersonalData shadow-block">
             <h3 class="closeButton noselect" @click="close">ЗАКРЫТЬ</h3>
             <div class="input_wrapper">
                 <input type="text" name="name" placeholder="Ник" v-model="user.NickName">
