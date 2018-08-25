@@ -8,12 +8,53 @@
                 <input type="text" name="name" placeholder="Город" v-model="user.City">
                 <textarea rows="3" name="name" placeholder="О себе" v-model="user.UserAbout"></textarea>
                 <p class="titleMessage">Входящие сообщения от пользователей:</p>
-                <div class="privacy-select">
+                <!--<div class="privacy-select">
                     <div class="privacy-select--button privacy-select--button__left" v-bind:class="{'privacy-select--button__active': user.MessageBan===true}" v-on:click="user.MessageBan = true">
                         <p>Запретить</p>
                     </div>
                     <div class="privacy-select--button privacy-select--button__right" v-bind:class="{'privacy-select--button__active': user.MessageBan===false}" v-on:click="user.MessageBan = false">
                         <p>Разрешить</p>
+                    </div>
+                </div>-->
+                <div class="switch">
+                    <div class="icon"
+                         @click="user.MessageBan = true"
+                         v-bind:class="{
+                    'left': user.MessageBan === true
+             }"
+                    >
+                        <div>
+                            <img src="../../assets/close.png">
+                        </div>
+                    </div>
+                    <div class="slider"
+                         v-bind:class="{
+                    'left': user.MessageBan === true,
+                    'right': user.MessageBan === false,
+             }"
+                    >
+                        <div class="slider-tap"
+                             @click="user.MessageBan = true"
+                        ></div>
+                        <div class="button"
+                             v-bind:class="{
+                    'left': user.MessageBan === true,
+                    'right': user.MessageBan === false,
+                 }"
+                        ></div>
+                        <div class="slider-tap"
+                             @click="user.MessageBan = false"
+                        ></div>
+                    </div>
+                    <div class="icon"
+                         @click="user.MessageBan = false"
+                         v-bind:class="{
+                    'right': user.MessageBan === false
+             }"
+                    >
+                        <div>
+                            <img src="../../assets/open.png">
+                        </div>
                     </div>
                 </div>
                 <div class="save-button noselect" @click="sendChanges()">
@@ -88,6 +129,7 @@ export default {
             color: $secondary-color;
             font-size: 15px;
             text-align: center;
+            margin-bottom: 16px;
         }
 
         .privacy-select {

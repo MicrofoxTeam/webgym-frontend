@@ -71,7 +71,7 @@ export default {
   },
   beforeCreate: function () {
     if (this.$store.getters['auth/checkLogin']) {
-      // this.$router.push('programs')
+      this.$router.push('programs')
     }
   }
 }
