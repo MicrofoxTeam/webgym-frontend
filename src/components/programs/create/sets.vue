@@ -27,11 +27,6 @@
                         <p class="editor__count">{{ set.RestTime }}</p>
                         <div class="editor__button" @click="decrement('RestTime')"><p>-</p></div>
                     </div>
-                    <div class="editor__area">
-                        <div class="editor__button" @click="increment('RestTime')"><p>+</p></div>
-                        <p class="editor__count">{{ set.RestTime }}</p>
-                        <div class="editor__button" @click="decrement('RestTime')"><p>-</p></div>
-                    </div>
                 </div>
                 <div class="next-button" @click="addSet" v-if="isOpened.add"><p>Добавить подход</p></div>
             </div>
@@ -144,7 +139,6 @@ export default {
                   display: flex;
                   justify-content: space-between;
                   flex-direction: column;
-                  border-radius: 5px;
 
                   p {
                       text-align: center;

@@ -13,7 +13,6 @@
       >
         <p>Добавить упражнение..</p>
       </div>
-      <!--
       <div class="select-tab"
         v-if="isOpened.sourceSelect"
       >
@@ -30,8 +29,6 @@
           <p>Загрузить</p>
         </div>
       </div>
-      -->
-      <!--
       <div class="type-select"
            v-if="isOpened.self"
       >
@@ -51,7 +48,6 @@
           <p>Work</p>
         </div>
       </div>
-      -->
       <div class="option"
            v-if="isOpened.sourceSelect"
       >
@@ -103,7 +99,7 @@ export default {
     return {
       isOpened: {
         sourceSelect: false,
-        self: true,
+        self: false,
         download: false,
         typeSelect: false
       }
@@ -182,7 +178,6 @@ export default {
       color: $secondary-color;
     }
 
-    /*
     .type-select {
       width: 300px;
       margin: 10px auto;
@@ -201,7 +196,6 @@ export default {
         }
       }
     }
-    */
 
     .option {
       width: 300px;
