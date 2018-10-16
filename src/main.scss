@@ -1,4 +1,5 @@
 $cubic_bezier: cubic-bezier(.7,0,.3,1);
+/*
 $accent-color: #2f9aac;
 $text-color: #dfdfe9;
 $secondary-color: #868686;
@@ -7,14 +8,26 @@ $background_module-color: #232531;
 $background_module__light-color: #303240;
 $sidebar-color: #1d2029;
 $error-color: #80262c;
+*/
+
+$accent-color: #2f9aac;
+$text-color: #dfdfe9;
+$secondary-color: #868686;
+$background-color: #0F1321;
+$background_module-color: #232531;
+$background_module__light-color: #103351;
+$sidebar-color: #103351;
+$error-color: #80262c;
+$green-color: #5E7D4D;
+$dark-green-color: #234E54;
 
 input {
     transition: .4s;
     margin-bottom: 18px;
     width: 100%;
-    border: 1px solid transparent;
+    border: 1px solid $dark-green-color;
     border-radius: 10px;
-    background-color: #303240;
+    background-color: transparent;
     outline: none;
     font-size: 18px;
     padding: 11px 11px 11px 14px;
@@ -28,9 +41,9 @@ textarea {
     transition: .4s;
     margin-bottom: 18px;
     width: 100%;
-    border: 1px solid transparent;
+    border: 1px solid $dark-green-color;
     border-radius: 10px;
-    background-color: #303240;
+    background-color: transparent;
     outline: none;
     font-size: 18px;
     padding: 11px 11px 11px 14px;
@@ -128,10 +141,10 @@ a {
         background-color: $background_module__light-color;
         display: flex;
         &.left {
-            background-color: #b5304d;
+            background-color: $accent-color;
         }
         &.right {
-            background-color: #1b45c9;
+            background-color: $accent-color;
         }
 
         > div {
@@ -156,11 +169,11 @@ a {
         flex-direction: row;
         &.left {
             transition: .2s $cubic_bezier;
-            background: linear-gradient(to right, #ff436d, transparent);
+            background: linear-gradient(to right, $accent-color, transparent);
         }
         &.right {
             transition: .2s $cubic_bezier;
-            background: linear-gradient(to left, #2258ff, transparent);
+            background: linear-gradient(to left, $accent-color, transparent);
         }
 
         .slider-tap {
@@ -179,11 +192,11 @@ a {
             transform: translateX(23px);
             &.left {
                 transform: translateX(-1px);
-                background-color: #ff436d;
+                background-color: $accent-color;
             }
             &.right {
                 transform: translateX(45px);
-                background-color: #2258ff;
+                background-color: $accent-color;
             }
         }
     }
@@ -362,6 +375,54 @@ $baby-blue: #f8faff;
         border: 1px solid $accent-color;
         p {
             color: $accent-color !important;
+        }
+    }
+}
+
+.add-button__wrapper {
+    position: fixed;
+    right: 30px;
+    min-width: 60px;
+    min-height: 60px;
+    bottom: calc((100vw / 6.25) + 30px);
+
+    .add-button__menu {
+        position: absolute;
+        bottom: 60px;
+        right: 0;
+        height: 200px;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: right;
+        .add-button__item {
+            width: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            margin-bottom: 18px;
+            padding: 8px;
+            background-color: $background_module__light-color;
+            border-radius: 8px;
+            p {
+                text-align: right;
+            }
+            span {
+
+            }
+        }
+    }
+
+    .add-button {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        border-radius: 30px;
+        background-color: $dark-green-color;
+        display: flex;
+        p {
+            margin: auto;
         }
     }
 }

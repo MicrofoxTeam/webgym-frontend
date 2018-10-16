@@ -10,9 +10,9 @@
           <p class="noselect">{{ value.name }}</p>
         </div>
       </router-link>
-      <router-link to="programs/create">
-        <div class="training new shadow-block">
-          <p class="noselect">Создать программу..</p>
+      <router-link tag="div" class="add-button__wrapper" to="programs/create">
+        <div class="add-button shadow-block">
+          <p class="noselect">+</p>
         </div>
       </router-link>
     </div>

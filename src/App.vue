@@ -23,9 +23,9 @@ export default {
       width: 100vw;
       height: 100vh;
       //background: linear-gradient(#2f4259, #212D3E, #1C1E2A);
-      background: $background-color;
       overflow: hidden;
       position: relative;
+      background-color: $background-color;
   }
   * {
     margin: 0;

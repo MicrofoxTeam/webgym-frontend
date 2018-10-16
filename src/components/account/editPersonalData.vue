@@ -57,8 +57,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="save-button noselect" @click="sendChanges()">
-                    <p>Сохранить</p>
+                <div class="bubbly-button noselect" @click="sendChanges()">
+                    <div>
+                        <img src="../../assets/save.png">
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,6 +112,19 @@ export default {
         background-color: $background_module-color;
         bottom: 0;
         overflow-y: scroll;
+
+        .bubbly-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            margin: 60px auto;
+            p, div {
+                img {
+                    width: 42px;
+                    height: auto;
+                }
+            }
+        }
 
         .closeButton {
             position: absolute;

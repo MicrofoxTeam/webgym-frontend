@@ -82,7 +82,7 @@ export default {
 .Register {
     width: 100vw;
     height: 100vh;
-    background-color: $background_module-color;
+    background-color: $background-color;
     z-index: 100;
     position: relative;
     overflow-y: scroll;
@@ -110,7 +110,7 @@ export default {
 
             .active-tab__line {
                 height: 1px;
-                background-color: $accent-color;
+                background-color: $dark-green-color;
                 position: absolute;
                 bottom: -2px;
                 transition: .5s $cubic_bezier;

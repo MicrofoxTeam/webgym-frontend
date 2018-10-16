@@ -7,6 +7,7 @@
               :exercise="value"
       ></exercise>
       <!---->
+      <add-button></add-button>
       <div class="card new shadow-block"
            v-if="!isOpened.sourceSelect"
            @click="openSourceSelect"
@@ -89,10 +90,12 @@
 </template>
 
 <script>
+import AddButton from '../addButton'
 export default {
   name: 'day',
   props: ['localId', 'trainingDays'],
   components: {
+    AddButton,
     'exercise': () => import('./exercise.vue')
   },
   data () {
