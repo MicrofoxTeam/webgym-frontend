@@ -13,6 +13,7 @@
       >
         <p>Добавить упражнение..</p>
       </div>
+      <!--
       <div class="select-tab"
         v-if="isOpened.sourceSelect"
       >
@@ -29,6 +30,8 @@
           <p>Загрузить</p>
         </div>
       </div>
+      -->
+      <!--
       <div class="type-select"
            v-if="isOpened.self"
       >
@@ -48,6 +51,44 @@
           <p>Work</p>
         </div>
       </div>
+      -->
+      <div class="option"
+           v-if="isOpened.sourceSelect"
+      >
+        <div class="option__whence">
+          <div class="option__tab option__tab_top-left"
+               @click="openSelf"
+               :class="{ 'option__tab__active': isOpened.self}"
+          >
+            <p>Создать</p>
+          </div>
+          <div class="option__tab option__tab_top-right"
+               @click="openDownload"
+               :class="{ 'option__tab__active': isOpened.download}"
+          >
+            <p>Загрузить</p>
+          </div>
+        </div>
+        <div class="option__type"
+             v-if="isOpened.self"
+        >
+          <div class="option__tab option__tab_bottom-left"
+               @click="addDay('1')"
+          >
+            <p>Силовое</p>
+          </div>
+          <div class="option__tab option__tab_bottom-middle"
+               @click="addDay('2')"
+          >
+            <p>Кардио</p>
+          </div>
+          <div class="option__tab option__tab_bottom-right"
+               @click="addDay('3')"
+          >
+            <p>WorkOut</p>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -62,7 +103,7 @@ export default {
     return {
       isOpened: {
         sourceSelect: false,
-        self: false,
+        self: true,
         download: false,
         typeSelect: false
       }
@@ -115,7 +156,7 @@ export default {
   .day {
     width: 100vw;
     height: 100vh;
-    padding-top: 5.5vw;
+    padding-top: 2vw;
     padding-bottom: calc(100vw / 6.25);
     z-index: 1;
     h1 {
@@ -141,6 +182,7 @@ export default {
       color: $secondary-color;
     }
 
+    /*
     .type-select {
       width: 300px;
       margin: 10px auto;
@@ -156,6 +198,67 @@ export default {
         p {
           margin: auto;
           color: $text-color;
+        }
+      }
+    }
+    */
+
+    .option {
+      width: 300px;
+      margin: 20px auto;
+
+      .option__tab {
+        display: flex;
+        border: 1px solid $secondary-color;
+        p {
+          margin: auto;
+        }
+      }
+
+      .option__tab__active {
+        border: 1px solid $accent-color;
+        p {
+          color: $accent-color;
+        }
+      }
+
+      .option__whence {
+        display: flex;
+        justify-content: space-around;
+
+        .option__tab {
+          width: 50%;
+          height: 40px;
+        }
+
+        .option__tab_top-left {
+          border-right: 1px solid $secondary-color;
+          border-radius: 15px 0 0 0;
+        }
+
+        .option__tab_top-right {
+          border-left: 1px solid $secondary-color;
+          border-radius: 0 15px 0 0;
+        }
+      }
+
+      .option__type {
+        display: flex;
+        justify-content: space-around;
+
+        .option__tab {
+          width: calc(100% / 3);
+          height: 40px;
+        }
+
+        .option__tab_bottom-left {
+          border-right: 0 solid transparent;
+          border-radius: 0 0 0 15px;
+        }
+
+        .option__tab_bottom-right {
+          border-left: 0 solid transparent;
+          border-radius: 0 0 15px 0;
         }
       }
     }

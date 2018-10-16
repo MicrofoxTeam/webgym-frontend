@@ -1,24 +1,37 @@
 <template>
   <div class="Create">
-    <div class="day-selector--wrapper">
-      <input v-model="program.name" placeholder="Название программы.."/>
-      <div>
-        <router-link :to="'/programs/create/'+day.number" class="day-selector"
-                     v-for="day in generator"
-                     :key="day.number"
-                     :class="{ 'filled':  program.trainingDays[day.number].Exercises.length !== 0}"
-        >
-          <p>{{ day.day }}</p>
-        </router-link>
+    <div class="substrate">
+      <div class="day-selector--wrapper">
+        <div class="header">
+          <div class="back"
+               @click="back"
+          >
+            <img src="../../assets/arrow-left.png">
+          </div>
+          <input v-model="program.name" class="program-name" placeholder="Название программы.."/>
+          <div class="save"
+               @click="saveProgram"
+          >
+            <img src="../../assets/save.png">
+          </div>
+        </div>
+        <div class="wrapper">
+          <router-link :to="'/programs/create/'+day.number" class="day-selector"
+                       v-for="day in generator"
+                       :key="day.number"
+                       :class="{ 'filled':  program.trainingDays[day.number].Exercises.length !== 0}"
+          >
+            <p>{{ day.day }}</p>
+          </router-link>
+        </div>
       </div>
     </div>
-    <div class="save-button" @click="saveProgram">
-      <p>Сохранить</p>
+    <div class="substrate">
+      <router-view
+              :localId="localId"
+              :trainingDays="program.trainingDays"
+      ></router-view>
     </div>
-    <router-view
-            :localId="localId"
-            :trainingDays="program.trainingDays"
-    ></router-view>
   </div>
 </template>
 
@@ -37,6 +50,9 @@ export default {
     }
   },
   methods: {
+    back () {
+      this.$router.push('/programs')
+    },
     saveProgram: function () {
       this.$store.commit('programs/CREATE_PROGRAM', {
         localId: this.localId,
@@ -73,7 +89,7 @@ export default {
     width: 100vw;
     height: 100vh;
     color: $text-color;
-    background-color: $background_module-color;
+    background: $background-color;
     z-index: 100;
     position: relative;
   }
@@ -84,7 +100,44 @@ export default {
     padding-bottom: 20px;
     margin: 0 auto;
 
-    > div {
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+
+      .program-name {
+        margin-bottom: 0;
+        width: calc(100% - 90px);
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .back {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        img {
+          margin: auto;
+          width: 80%;
+        }
+      }
+
+      .save {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        border-radius: 20px;
+        background-color: $accent-color;
+        img {
+          margin: auto;
+          width: 60%;
+        }
+      }
+    }
+
+    .wrapper {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
@@ -93,7 +146,7 @@ export default {
       .day-selector {
         width: 40px;
         height: 40px;
-        border-radius: 12px;
+        border-radius: 20px;
         border: 2px solid $secondary-color;
         display: flex;
         color: $secondary-color;
@@ -107,11 +160,13 @@ export default {
         &.router-link-active {
           border: 2px solid $accent-color;
           color: $text-color;
+          border-radius: 12px;
         }
 
         &.filled {
           border: 2px solid $accent-color;
           color: $accent-color;
+          border-radius: 12px;
 
           &.router-link-active {
             background-color: transparent;

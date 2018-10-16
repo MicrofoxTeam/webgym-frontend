@@ -1,32 +1,36 @@
 <template>
   <transition name="fade">
     <div class="account">
-      <div class="account_wrapper">
-        <div class="avatar">
-        </div>
-        <div class="user_wrapper">
-          <div class="name_wrapper"
-            @click="clean"
-          >
-            <h1>{{ user.NickName }}</h1>
-            <h2>{{ user.Email }}</h2>
-            <h2>{{ user.FullName }}</h2>
+      <div class="substrate">
+        <div class="account_wrapper">
+          <div class="avatar">
           </div>
-          <div class="control_wrapper">
-            <h3 class="noselect" @click="isEditPersonalDataOpen = true">РЕДАКТИРОВАТЬ</h3>
-            <h3 class="noselect" @click="logout()">ВЫЙТИ</h3>
+          <div class="user_wrapper">
+            <div class="name_wrapper"
+                 @click="clean"
+            >
+              <h1>{{ user.NickName }}</h1>
+              <h2>{{ user.Email }}</h2>
+              <h2>{{ user.FullName }}</h2>
+            </div>
+            <div class="control_wrapper">
+              <h3 class="noselect" @click="isEditPersonalDataOpen = true">РЕДАКТИРОВАТЬ</h3>
+              <h3 class="noselect" @click="logout()">ВЫЙТИ</h3>
+            </div>
           </div>
         </div>
       </div>
-      <div class="select-tab">
-        <router-link class="select-tab__button select-tab__left" to="/account/messages">
-          <p>Сообщения</p>
-        </router-link>
-        <router-link class="select-tab__button select-tab__right" to="/account/feedback">
-          <p>Вопросы</p>
-        </router-link>
+      <div class="substrate substrate_account-tabs">
+        <div class="select-tab">
+          <router-link class="select-tab__button select-tab__left" to="/account/messages">
+            <p>Сообщения</p>
+          </router-link>
+          <router-link class="select-tab__button select-tab__right" to="/account/feedback">
+            <p>Вопросы</p>
+          </router-link>
+        </div>
+        <router-view @scrollToMe="scrollToMe"></router-view>
       </div>
-      <router-view @scrollToMe="scrollToMe"></router-view>
       <message-field
               v-if="isMessageFieldOpen"
               @closeMe="isMessageFieldOpen = false"
@@ -86,19 +90,19 @@ export default {
 
 <style lang="scss" scoped>
   @import '../main.scss';
+
   .account {
     width: 100vw;
     height: 100vh;
-    padding-top: 5.5vw;
     padding-bottom: calc(100vw / 6.25);
     z-index: 1;
-    overflow-y: scroll;
   }
 
   .account_wrapper {
+    padding: 5.5vw 0;
     position: relative;
     width: 310px;
-    height: auto;
+    height: calc(80px + 11vw);
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -134,8 +138,13 @@ export default {
     }
   }
 
+  .substrate_account-tabs {
+    height: calc(100% - calc(80px + 11vw) - 6vw); // 100% - account_wrapper - margin
+    overflow-y: scroll;
+  }
+
   .select-tab {
-    margin-top: 40px;
+    padding-top: 20px;
   }
 
   .openBottom-enter-active, .openBottom-leave-active {
